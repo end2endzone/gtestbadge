@@ -17,9 +17,12 @@ int main(int argc, char **argv)
   ::testing::GTEST_FLAG(filter) = "*";
   ::testing::InitGoogleTest(&argc, argv);
 
+  //create output directory
+  _mkdir("tests");
+
   // Create Badge event listener
   BadgeEventListener * badge = new BadgeEventListener();
-  badge->setOutputFilename("mybadge.svg");
+  badge->setOutputFilename("tests/mybadge.svg");
 
   // Register event listener
   ::testing::UnitTest& unitTest = *::testing::UnitTest::GetInstance() ; 
@@ -27,10 +30,6 @@ int main(int argc, char **argv)
   listeners.Append( badge ) ; //Google Test takes the ownership.
 
   int wResult = RUN_ALL_TESTS(); //Find and run all tests
-
-  //tests
-  BadgeEventListener::generateBadge("tests_passed_51_appveyor.generated.svg", 51, 0, 0, BadgeEventListener::ICON_APPVEYOR);
-  BadgeEventListener::generateBadge("tests_passed_51.generated.svg", 51, 0, 0, BadgeEventListener::ICON_NONE);
 
   return wResult; // returns 0 if all the tests are successful, or 1 otherwise
 }

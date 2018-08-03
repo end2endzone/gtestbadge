@@ -28,8 +28,8 @@ Badge::Badge()
   mLeft.font_size = 11;
   mLeft.text = "left";
   mLeft.width = Badge::WIDTH_AUTO;
-  mLeft.text_left_padding = 0;
-  mLeft.text_right_padding = 0;
+  mLeft.text_left_padding = 1;
+  mLeft.text_right_padding = 1;
 
   mRight = mLeft;
   mRight.back_color = "#c0c0c0";

@@ -7,7 +7,6 @@ std::string gTestFolder = "tests/";
 
 void TestBadge::SetUpTestCase()
 {
-  _mkdir("tests");
 }
 
 void TestBadge::TearDownTestCase()
@@ -193,6 +192,111 @@ TEST_F(TestBadge, testRightColor)
 
   Badge b;
   b.setRightBackgroundColor("#00f");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testTestPassed)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setRightBackgroundColor("#4c1"); //brightgreen
+  b.setLeftText("tests");
+  b.setRightText("51 passed");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testTestWarning)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setRightBackgroundColor("#fe7d37");  //orange
+  b.setLeftText("tests");
+  b.setRightText("2 failed");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testTestFailed)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setRightBackgroundColor("#e05d44");  //red
+  b.setLeftText("tests");
+  b.setRightText("99 failed");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testBuildPassed)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setRightBackgroundColor("#4c1"); //brightgreen
+  b.setLeftText("build");
+  b.setRightText("success");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testBuildFailed)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setRightBackgroundColor("#e05d44");  //red
+  b.setLeftText("build");
+  b.setRightText("failed");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testLicenseBadge)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setRightBackgroundColor("#ffc90e"); //gold
+  b.setLeftText("License");
+  b.setRightText("MIT");
+  b.setRightTextLeftPadding(3);
+  b.setRightTextRightPadding(3);
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testUnknown)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setLeftText("Unknown");
+  b.setRightText("!!!!!");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testCoverage)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setRightBackgroundColor("#e05d44");  //red
+  b.setLeftText("Coverage");
+  b.setRightText("3%");
   bool saved = b.save(gTestFolder + filename);
   ASSERT_TRUE(saved);
 }

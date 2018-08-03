@@ -5,7 +5,7 @@
  * Source code for file 'template.svg', last modified 1534187611.
  * Do not modify this file.
  */
-#include "SvgTemplate.h"
+#include "BadgeTemplate.h"
 #include <stdio.h> //for FILE
 #include <stdint.h>
 
