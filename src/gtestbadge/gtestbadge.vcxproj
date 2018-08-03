@@ -80,19 +80,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Badge.cpp" />
     <ClCompile Include="BadgeEventListener.cpp" />
+    <ClCompile Include="BadgeTemplate.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="rapid.cpp" />
     <ClCompile Include="SvgTemplate.cpp" />
+    <ClCompile Include="TestBadge.cpp" />
     <ClCompile Include="TestBar.cpp" />
     <ClCompile Include="TestFoo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Badge.h" />
     <ClInclude Include="BadgeEventListener.h" />
+    <ClInclude Include="BadgeTemplate.h" />
+    <ClInclude Include="rapid.h" />
     <ClInclude Include="SvgTemplate.h" />
+    <ClInclude Include="TestBadge.h" />
     <ClInclude Include="TestBar.h" />
     <ClInclude Include="TestFoo.h" />
+    <ClInclude Include="verdana.h" />
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="BadgeTemplate.rc" />
     <ResourceCompile Include="SvgTemplate.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

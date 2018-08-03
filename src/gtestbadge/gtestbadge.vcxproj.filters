@@ -33,6 +33,18 @@
     <ClCompile Include="SvgTemplate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Badge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BadgeTemplate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestBadge.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="rapid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestFoo.h">
@@ -47,9 +59,27 @@
     <ClInclude Include="SvgTemplate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Badge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verdana.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BadgeTemplate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBadge.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="rapid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SvgTemplate.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="BadgeTemplate.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
