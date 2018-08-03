@@ -119,60 +119,89 @@ bool BadgeEventListener::generateBadge(const std::string & iFilename, int succes
 {
   int total = success + failures;
 
-  //define badge color & right_text
-  char * color = NULL;
-  bool showSuccess = true;
-  std::string right_text;
-  size_t numDigits = 0;
+  //define level
+  const int LEVEL_SUCCESS = 0;
+  const int LEVEL_WARNING = 1;
+  const int LEVEL_ERROR = 2;
+  int level = LEVEL_SUCCESS;
   const double failureRatio = double(failures)/double(total);
   if (failures == 0)
   {
-    color = "#97CA00"; //green
-    right_text = toString(success);
-    numDigits = right_text.size();
-    right_text += " passed";
-    showSuccess = true;
+    level = LEVEL_SUCCESS;
   }
   else if (failureRatio >= 0.10)
   {
-    color = "#e05d44"; //red
-    right_text = toString(failures);
-    numDigits = right_text.size();
-    right_text += " failures";
-    showSuccess = false;
+    level = LEVEL_ERROR;
   }
   else
   {
+    level = LEVEL_WARNING;
+  }
+
+  //define badge color
+  char * color = NULL;
+  switch(level)
+  {
+  case LEVEL_SUCCESS:
+    color = "#97CA00"; //green
+    break;
+  case LEVEL_WARNING:
     color = "#fe7d37"; //orange
+    break;
+  case LEVEL_ERROR:
+  default:
+    color = "#e05d44"; //red
+    break;
+  };
+
+  //define right_text
+  std::string right_text;
+  size_t numDigits = 0;
+  switch(level)
+  {
+  case LEVEL_SUCCESS:
+    right_text = toString(success);
+    numDigits = right_text.size();
+    right_text += " passed";
+    break;
+  case LEVEL_WARNING:
     right_text = toString(failures);
     numDigits = right_text.size();
     right_text += " failures";
-    showSuccess = false;
-  }
+    break;
+  case LEVEL_ERROR:
+  default:
+    right_text = toString(failures);
+    numDigits = right_text.size();
+    right_text += " failures";
+    break;
+  };
 
-  //define width
-  int width = 0;
+  //define left and right width
+  int left_width = 37;
+  int right_width = 0;
   int right_text_length = 0;
   int right_text_x = 0;
-  if (showSuccess)
   {
-    //right_text_x      = 36 * numDigits + 620;
-    //right_text_length = 72 * numDigits + 420;
-    //width             = (int)(7.2*double(numDigits) + 89.0);
-
-    right_text_x      = (int)(36.667*double(numDigits) + 618.33 + 0.01);
-    right_text_length = (int)(73.333*double(numDigits) + 416.67 + 0.01);
-    width             = (int)(7.3333*double(numDigits) + 88.667 + 0.01);
-  }
-  else
-  {
-    //right_text_x      = 36 * numDigits + 630;
-    //right_text_length = 72 * numDigits + 440;
-    //width             = (int)(7.2*double(numDigits) + 91.0);
-
-    right_text_x      = (int)(36.667*double(numDigits) + 628.33 + 0.01);
-    right_text_length = (int)(73.333*double(numDigits) + 436.67 + 0.01);
-    width             = (int)(7.3333*double(numDigits) + 90.667 + 0.01);
+    double right_text_x_d;
+    double right_text_length_d;
+    double right_width_d;
+    switch(level)
+    {
+    case LEVEL_SUCCESS:
+      right_text_x_d       = 35.429*double(numDigits) + 621.0;
+      right_text_length_d  = 70.857*double(numDigits) + 422.0;
+      right_width_d        = 7.0857*double(numDigits) +  52.2;
+      break;
+    default:
+      right_text_x_d      = 35.429*double(numDigits) + 631.0;
+      right_text_length_d = 70.857*double(numDigits) + 442.0;
+      right_width_d       = 7.0857*double(numDigits) +  54.2;
+      break;
+    };
+    right_text_x      = (int)right_text_x_d;
+    right_text_length = (int)right_text_length_d;
+    right_width       = (int)right_width_d;
   }
 
   //define icon
@@ -184,17 +213,20 @@ bool BadgeEventListener::generateBadge(const std::string & iFilename, int succes
   {
   case ICON_APPVEYOR:
     icon = icon_appveyor;
-    width += 17;
+    left_width += 17;
     break;
   case ICON_TRAVIS:
     icon = icon_travis;
-    width += 17;
+    left_width += 17;
     break;
   case ICON_NONE:
   default:
     icon = icon_none;
     break;
   };
+
+  //define width
+  int width = left_width + right_width;
 
   //define text_x_offset
   int text_x_offset = 0;
@@ -210,11 +242,13 @@ bool BadgeEventListener::generateBadge(const std::string & iFilename, int succes
   std::string svg = svgTemplate.getBuffer();
 
   //process with search and replace
+  strReplace(svg, "{left.width}", toString(left_width));
+  strReplace(svg, "{right.width}", toString(right_width));
   strReplace(svg, "{width}", toString(width));
   strReplace(svg, "{right.color}", color);
   strReplace(svg, "{left.text.x}", toString(195+text_x_offset));
   strReplace(svg, "{right.text.x}", toString(right_text_x+text_x_offset));
-  strReplace(svg, "{right.text.length}", toString(right_text_length+text_x_offset));
+  strReplace(svg, "{right.text.length}", toString(right_text_length));
   strReplace(svg, "{left.text}", "tests");
   strReplace(svg, "{right.text}", right_text);
   if (icon.size() > 0)

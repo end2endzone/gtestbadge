@@ -7,8 +7,8 @@
     <rect width="{width}" height="20" rx="3" fill="#fff"/>
   </clipPath>
   <g clip-path="url(#a)">
-    <path fill="#555" d="M0 0h37v20H0z"/>
-    <path fill="{right.color}" d="M37 0h67v20H37z"/>
+    <path fill="#555" d="M0 0h{left.width}v20H0z"/>
+    <path fill="{right.color}" d="M{left.width} 0h{right.width}v20H{left.width}z"/>
     <path fill="url(#b)" d="M0 0h{width}v20H0z"/>
   </g>
   <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
