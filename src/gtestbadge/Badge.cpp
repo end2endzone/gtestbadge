@@ -25,6 +25,7 @@ int getVerdanaTextWidth(const std::string & iStr, const int iFontSize)
 Badge::Badge()
 {
   mLeft.back_color = "#555";
+  mLeft.front_color = "#fff";
   mLeft.font_size = 11;
   mLeft.text = "left";
   mLeft.width = Badge::WIDTH_AUTO;
@@ -55,6 +56,11 @@ void Badge::setLeftBackgroundColor(const std::string & color)
   mLeft.back_color = color;
 }
 
+void Badge::setLeftForegroundColor(const std::string & color)
+{
+  mLeft.front_color = color;
+}
+
 void Badge::setRightText(const std::string & text)
 {
   mRight.text = text;
@@ -68,6 +74,11 @@ void Badge::setRightWidth(int width)
 void Badge::setRightBackgroundColor(const std::string & color)
 {
   mRight.back_color = color;
+}
+
+void Badge::setRightForegroundColor(const std::string & color)
+{
+  mRight.front_color = color;
 }
 
 void Badge::setLeftTextLeftPadding(int size)
@@ -132,6 +143,8 @@ bool Badge::save(const std::string & iFilePath)
   strReplace(svg, "{right.width}", toString(right_width));
   strReplace(svg, "{left.back_color}", mLeft.back_color);
   strReplace(svg, "{right.back_color}", mRight.back_color);
+  strReplace(svg, "{left.front_color}", mLeft.front_color);
+  strReplace(svg, "{right.front_color}", mRight.front_color);
   strReplace(svg, "{left.text.x}",  toString( mLeft.text_left_padding + mLeft.width/2 ));
   strReplace(svg, "{right.text.x}", toString( left_width + mRight.text_left_padding + mRight.width/2 ));
   strReplace(svg, "{left.text}", mLeft.text);

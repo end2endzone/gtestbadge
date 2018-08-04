@@ -71,7 +71,9 @@ TEST_F(TestBadge, testFull)
 
   Badge b;
   b.setLeftBackgroundColor("#ffc90e"); //gold
-  b.setRightBackgroundColor("#f00");
+  b.setLeftForegroundColor("#000");
+  b.setRightBackgroundColor("#f00"); //red
+  b.setRightForegroundColor("#00f"); //blue
   b.setLeftFontSize(8);
   b.setRightFontSize(20);
   b.setLeftText("foo");
@@ -174,7 +176,7 @@ TEST_F(TestBadge, testRightWidth)
   ASSERT_TRUE(saved);
 }
 
-TEST_F(TestBadge, testLeftColor)
+TEST_F(TestBadge, testLeftBackColor)
 {
   const std::string filename = getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
@@ -185,13 +187,35 @@ TEST_F(TestBadge, testLeftColor)
   ASSERT_TRUE(saved);
 }
 
-TEST_F(TestBadge, testRightColor)
+TEST_F(TestBadge, testRightBackColor)
 {
   const std::string filename = getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
   b.setRightBackgroundColor("#00f");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testLeftFrontColor)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setLeftForegroundColor("#0f0");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testRightFrontColor)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setRightForegroundColor("#00f");
   bool saved = b.save(gTestFolder + filename);
   ASSERT_TRUE(saved);
 }
@@ -299,4 +323,44 @@ TEST_F(TestBadge, testCoverage)
   b.setRightText("3%");
   bool saved = b.save(gTestFolder + filename);
   ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testRightTextEmpty)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setLeftText("right empty");
+  b.setRightText("");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testLeftTextEmpty)
+{
+  const std::string filename = getTestQualifiedName() + ".svg";
+  gTestFiles.push_back(filename);
+
+  Badge b;
+  b.setLeftText("");
+  b.setRightText("left empty");
+  bool saved = b.save(gTestFolder + filename);
+  ASSERT_TRUE(saved);
+}
+
+TEST_F(TestBadge, testFontSize)
+{
+  for(int font_size = 1; font_size <= 30; font_size++)
+  {
+    const std::string filename = getTestQualifiedName() + "." + toString(font_size) + ".svg";
+    gTestFiles.push_back(filename);
+
+    Badge b;
+    b.setLeftText("Size");
+    b.setRightText(toString(font_size));
+    b.setRightFontSize(font_size);
+    bool saved = b.save(gTestFolder + filename);
+    ASSERT_TRUE(saved);
+  }
 }

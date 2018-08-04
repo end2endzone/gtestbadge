@@ -2,9 +2,12 @@
 #include "rapid.h"
 #include "Badge.h"
 
+const double BadgeEventListener::DEFAULT_WARNING_RATIO = 0.10;
+
 BadgeEventListener::BadgeEventListener()
 {
   mOutputFilename = "badge.svg";
+  mWarningRatio = DEFAULT_WARNING_RATIO;
 }
 
 BadgeEventListener::~BadgeEventListener()
@@ -67,7 +70,7 @@ void BadgeEventListener::OnTestProgramEnd(const UnitTest& unit_test)
   int numRun = unit_test.test_to_run_count();
   int numTotalTests = unit_test.total_test_count();
 
-  bool success = generateBadge(mOutputFilename, numSuccess, numFailed, numDisabled, ICON_NONE);
+  bool success = generateBadge(mOutputFilename, mWarningRatio, numSuccess, numFailed, numDisabled, ICON_NONE);
 }
 
 void BadgeEventListener::setOutputFilename(const std::string & iFilename)
@@ -76,6 +79,11 @@ void BadgeEventListener::setOutputFilename(const std::string & iFilename)
 }
 
 bool BadgeEventListener::generateBadge(const std::string & iFilename, int success, int failures, int disabled, const SYSTEM_ICON & iIcon)
+{
+  return generateBadge(iFilename, DEFAULT_WARNING_RATIO, success, failures, disabled, iIcon);
+}
+
+bool BadgeEventListener::generateBadge(const std::string & iFilename, const double & iWarningRatio, int success, int failures, int disabled, const SYSTEM_ICON & iIcon)
 {
   int total = success + failures;
 
@@ -89,7 +97,7 @@ bool BadgeEventListener::generateBadge(const std::string & iFilename, int succes
   {
     level = LEVEL_SUCCESS;
   }
-  else if (failureRatio >= 0.10)
+  else if (failureRatio >= iWarningRatio)
   {
     level = LEVEL_ERROR;
   }

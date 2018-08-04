@@ -80,4 +80,9 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="BadgeTemplate.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

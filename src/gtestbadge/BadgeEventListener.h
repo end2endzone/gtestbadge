@@ -12,6 +12,7 @@ public:
   BadgeEventListener();
   virtual ~BadgeEventListener();
 
+  //TestEventListener methods
   virtual void OnTestProgramStart(const UnitTest& unit_test);
   virtual void OnTestIterationStart(const UnitTest& unit_test, int iteration);
   virtual void OnEnvironmentsSetUpStart(const UnitTest& unit_test);
@@ -26,7 +27,14 @@ public:
   virtual void OnTestIterationEnd(const UnitTest& unit_test, int iteration);
   virtual void OnTestProgramEnd(const UnitTest& unit_test);
 
+  //
   void setOutputFilename(const std::string & iFilename);
+  const std::string & getOutputFilename() const { return mOutputFilename; }
+  void setWarningRatio(double ratio);
+  const double & getWarningRatio() const { return mWarningRatio; }
+
+  //constants
+  static const double DEFAULT_WARNING_RATIO;
 
   enum SYSTEM_ICON
   {
@@ -35,7 +43,9 @@ public:
     ICON_TRAVIS,
   };
   static bool generateBadge(const std::string & iFilename, int success, int failures, int disabled, const SYSTEM_ICON & iIcon);
+  static bool generateBadge(const std::string & iFilename, const double & iWarningRatio, int success, int failures, int disabled, const SYSTEM_ICON & iIcon);
 
 private:
   std::string mOutputFilename;
+  double mWarningRatio;
 };

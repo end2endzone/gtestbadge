@@ -104,6 +104,9 @@
   <ItemGroup>
     <ResourceCompile Include="BadgeTemplate.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="BadgeTemplate.svg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
