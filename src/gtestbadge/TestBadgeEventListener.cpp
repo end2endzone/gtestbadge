@@ -33,7 +33,7 @@ void TestBadgeEventListener::TearDownTestCase()
   for(size_t i=0; i<gTestFiles2.size(); i++)
   {
     const std::string & testFile = gTestFiles2[i];
-    fprintf(f, "    <tr><td>%s</td><td><img src=\"%s\" /></td></tr>\n", testFile.c_str(), testFile.c_str());
+    fprintf(f, "    <tr><td><a href=\"%s\">%s</a></td><td><img src=\"%s\" /></td></tr>\n", testFile.c_str(), testFile.c_str(), testFile.c_str());
   }
 
   //print footer

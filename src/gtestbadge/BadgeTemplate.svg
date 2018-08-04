@@ -1,22 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{width}" height="20">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{width}" height="{height}">
   <linearGradient id="b" x2="0" y2="100%">
     <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
     <stop offset="1" stop-opacity=".1"/>
   </linearGradient>
   <clipPath id="a">
-    <rect width="{width}" height="20" rx="3" fill="#fff"/>
+    <rect width="{width}" height="{height}" rx="3" fill="#fff"/>
   </clipPath>
   <g clip-path="url(#a)">
-    <path fill="{left.back_color}" d="M0 0h{left.width}v20H0z"/>
-    <path fill="{right.back_color}" d="M{left.width} 0h{right.width}v20H{left.width}z"/>
-    <path fill="url(#b)" d="M0 0h{width}v20H0z"/>
+    <path fill="{left.back_color}" d="M0 0h{left.width}v{height}H0z"/>
+    <path fill="{right.back_color}" d="M{left.width} 0h{right.width}v{height}H{left.width}z"/>
+    <path fill="url(#b)" d="M0 0h{width}v{height}H0z"/>
   </g>
   <g fill="{left.front_color}" text-anchor="middle" font-family="Verdana,Geneva,sans-serif" font-size="{left.font_size}">
-{icon}    <text x="{left.text.x}" y="15" fill="#010101" fill-opacity=".3">{left.text}</text>
-    <text x="{left.text.x}" y="14">{left.text}</text>
+{icon}    <text x="{left.text.x}" y="{left.shadow.height}" fill="#010101" fill-opacity=".3">{left.text}</text>
+    <text x="{left.text.x}" y="{left.text.height}">{left.text}</text>
   </g>
   <g fill="{right.front_color}" text-anchor="middle" font-family="Verdana,Geneva,sans-serif" font-size="{right.font_size}">
-    <text x="{right.text.x}" y="15" fill="#010101" fill-opacity=".3">{right.text}</text>
-    <text x="{right.text.x}" y="14">{right.text}</text>
+    <text x="{right.text.x}" y="{right.shadow.height}" fill="#010101" fill-opacity=".3">{right.text}</text>
+    <text x="{right.text.x}" y="{right.text.height}">{right.text}</text>
   </g>
 </svg>

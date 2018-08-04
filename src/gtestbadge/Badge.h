@@ -17,10 +17,13 @@ public:
   
   //constants
   static const int WIDTH_AUTO = -1;
+  static const int HEIGHT_AUTO = -1;
 
   //ctor
   Badge();
   virtual ~Badge();
+
+  void setHeight(int size);
 
   void setLeftFontSize(int size);
   void setLeftText(const std::string & text);
@@ -41,6 +44,8 @@ public:
   bool save(const std::string & iFilePath);
 
   //inline getters
+  int getHeight() const                               { return mHeight; }
+
   int getLeftFontSize() const                         { return mLeft.font_size; }
   const std::string & getLeftText() const             { return mLeft.text; }
   int getLeftWidth() const                            { return mLeft.width; }
@@ -63,6 +68,7 @@ public:
   SIDE_PROPERTIES & getRightSide()                    { return mRight; }
 
 private:
+  int mHeight;
   SIDE_PROPERTIES mLeft;
   SIDE_PROPERTIES mRight;
 };

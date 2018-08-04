@@ -33,7 +33,7 @@ void TestBadge::TearDownTestCase()
   for(size_t i=0; i<gTestFiles.size(); i++)
   {
     const std::string & testFile = gTestFiles[i];
-    fprintf(f, "    <tr><td>%s</td><td><img src=\"%s\" /></td></tr>\n", testFile.c_str(), testFile.c_str());
+    fprintf(f, "    <tr><td><a href=\"%s\">%s</a></td><td><img src=\"%s\" /></td></tr>\n", testFile.c_str(), testFile.c_str(), testFile.c_str());
   }
 
   //print footer
@@ -70,12 +70,13 @@ TEST_F(TestBadge, testFull)
   gTestFiles.push_back(filename);
 
   Badge b;
+  b.setHeight(60);
   b.setLeftBackgroundColor("#ffc90e"); //gold
   b.setLeftForegroundColor("#000");
   b.setRightBackgroundColor("#f00"); //red
   b.setRightForegroundColor("#00f"); //blue
   b.setLeftFontSize(8);
-  b.setRightFontSize(20);
+  b.setRightFontSize(30);
   b.setLeftText("foo");
   b.setRightText("bar");
   b.setLeftTextLeftPadding(50);
@@ -357,9 +358,26 @@ TEST_F(TestBadge, testFontSize)
     gTestFiles.push_back(filename);
 
     Badge b;
-    b.setLeftText("Size");
+    b.setHeight(Badge::HEIGHT_AUTO);
+    b.setLeftText("FontSize");
     b.setRightText(toString(font_size));
     b.setRightFontSize(font_size);
+    bool saved = b.save(gTestFolder + filename);
+    ASSERT_TRUE(saved);
+  }
+}
+
+TEST_F(TestBadge, testHeight)
+{
+  for(int height = 1; height <= 100; height+=10)
+  {
+    const std::string filename = getTestQualifiedName() + "." + toString(height) + ".svg";
+    gTestFiles.push_back(filename);
+
+    Badge b;
+    b.setHeight(height);
+    b.setLeftText("Height");
+    b.setRightText(toString(height));
     bool saved = b.save(gTestFolder + filename);
     ASSERT_TRUE(saved);
   }
