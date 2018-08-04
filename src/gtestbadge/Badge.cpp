@@ -48,6 +48,11 @@ void Badge::setHeight(int size)
   mHeight = size;
 }
 
+void Badge::setBase64Icon(const std::string & icon)
+{
+  mIcon = icon;
+}
+
 void Badge::setLeftText(const std::string & text)
 {
   mLeft.text = text;
@@ -147,6 +152,31 @@ bool Badge::save(const std::string & iFilePath)
     mHeight = max_font_height;
   }
 
+  //define icon
+  std::string icon;
+  int icon_offset = 0;
+  if (!mIcon.empty())
+  {
+    static const char * icon_template = "    <image x=\"{x}\" y=\"{y}\" width=\"{width}\" height=\"{height}\" xlink:href=\"data:image/svg+xml;base64,{code}\"/>\n";
+    const int icon_width = (mHeight*70)/100;
+    const int icon_height = icon_width;
+    const int icon_padding = (icon_width*15)/100;
+    const int icon_x = icon_padding; //0;//5 + icon_padding/2;
+    const int icon_y = mHeight/2 - icon_height/2;
+
+    //process replace in template
+    icon = icon_template;
+    strReplace(icon, "{width}", toString(icon_width));
+    strReplace(icon, "{height}", toString(icon_height));
+    strReplace(icon, "{x}", toString(icon_x));
+    strReplace(icon, "{y}", toString(icon_y));
+    strReplace(icon, "{code}", mIcon);
+
+    //increase left padding if using an icon
+    icon_offset = icon_padding + icon_width + icon_padding;
+    mLeft.text_left_padding += icon_offset;
+  }
+
   //define width calculations
   int  left_width = mLeft.width  + mLeft.text_left_padding  + mLeft.text_right_padding;
   int right_width = mRight.width + mRight.text_left_padding + mRight.text_right_padding;
@@ -183,19 +213,18 @@ bool Badge::save(const std::string & iFilePath)
   strReplace(svg, "{left.text.height}", toString(left_text_height));
   strReplace(svg, "{right.text.height}", toString(right_text_height));
 
-  //if (icon.size() > 0)
-  //{
-  //  icon.append("\n");
-  //  strReplace(svg, "{icon}", icon.c_str());
-  //}
-  //else
-  {
-    strReplace(svg, "{icon}", "");
-  }
+  //replace icon within main svg
+  strReplace(svg, "{icon}", icon.c_str());
 
   //write template to file
   fputs(svg.c_str(), f);
   fclose(f);
+
+  //restore icon left padding
+  if (!mIcon.empty())
+  {
+    mLeft.text_left_padding -= icon_offset;
+  }
 
   return true;
 }

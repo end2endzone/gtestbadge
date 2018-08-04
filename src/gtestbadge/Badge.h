@@ -24,6 +24,7 @@ public:
   virtual ~Badge();
 
   void setHeight(int size);
+  void setBase64Icon(const std::string & icon);
 
   void setLeftFontSize(int size);
   void setLeftText(const std::string & text);
@@ -45,6 +46,7 @@ public:
 
   //inline getters
   int getHeight() const                               { return mHeight; }
+  const std::string & getBase64Icon() const           { return mIcon; }
 
   int getLeftFontSize() const                         { return mLeft.font_size; }
   const std::string & getLeftText() const             { return mLeft.text; }
@@ -69,6 +71,7 @@ public:
 
 private:
   int mHeight;
+  std::string mIcon;
   SIDE_PROPERTIES mLeft;
   SIDE_PROPERTIES mRight;
 };
