@@ -12,7 +12,6 @@ add_library(gtestbadge STATIC
   BadgeEventListener.cpp
   BadgeTemplate.cpp
   BadgeTemplate.h
-  BadgeTemplate.rc
   main.cpp
   verdana.h
 )
