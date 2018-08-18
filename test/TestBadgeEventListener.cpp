@@ -1,6 +1,7 @@
 #include "TestBadgeEventListener.h"
 #include "gtestbadge/BadgeEventListener.h"
-#include "rapid.h"
+#include "rapidassist/strings.h"
+#include "rapidassist/gtesthelp.h"
 
 std::vector<std::string> gTestFiles2;
 std::string gTestFolder2 = "tests/";
@@ -56,7 +57,7 @@ void TestBadgeEventListener::TearDown()
 
 TEST_F(TestBadgeEventListener, testPassedNoIcon)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles2.push_back(filename);
 
   bool saved = BadgeEventListener::generateBadge((gTestFolder2 + filename).c_str(), 51, 0, 0, BadgeEventListener::ICON_NONE);
@@ -65,7 +66,7 @@ TEST_F(TestBadgeEventListener, testPassedNoIcon)
 
 TEST_F(TestBadgeEventListener, testWarningNoIcon)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles2.push_back(filename);
 
   bool saved = BadgeEventListener::generateBadge((gTestFolder2 + filename).c_str(), 51, 4, 0, BadgeEventListener::ICON_NONE);
@@ -74,7 +75,7 @@ TEST_F(TestBadgeEventListener, testWarningNoIcon)
 
 TEST_F(TestBadgeEventListener, testFailNoIcon)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles2.push_back(filename);
 
   bool saved = BadgeEventListener::generateBadge((gTestFolder2 + filename).c_str(), 1, 99, 0, BadgeEventListener::ICON_NONE);
@@ -83,7 +84,7 @@ TEST_F(TestBadgeEventListener, testFailNoIcon)
 
 TEST_F(TestBadgeEventListener, testPassedAppveyorIcon)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles2.push_back(filename);
 
   bool saved = BadgeEventListener::generateBadge((gTestFolder2 + filename).c_str(), 51, 0, 0, BadgeEventListener::ICON_APPVEYOR);

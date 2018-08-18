@@ -14,8 +14,6 @@ add_library(gtestbadge STATIC
   BadgeTemplate.h
   BadgeTemplate.rc
   main.cpp
-  rapid.cpp
-  rapid.h
   verdana.h
 )
 

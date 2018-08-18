@@ -1,6 +1,8 @@
 #include "gtestbadge/BadgeEventListener.h"
 #include "gtestbadge/Badge.h"
-#include "rapid.h"
+#include "rapidassist/strings.h"
+
+using ra::strings::toString;
 
 const double BadgeEventListener::DEFAULT_WARNING_RATIO = 0.10;
 
