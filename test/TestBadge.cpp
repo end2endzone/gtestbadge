@@ -1,5 +1,5 @@
 #include "TestBadge.h"
-#include "Badge.h"
+#include "gtestbadge/Badge.h"
 #include "rapid.h"
 
 std::vector<std::string> gTestFiles;

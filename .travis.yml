@@ -1,0 +1,24 @@
+dist: trusty
+sudo: required 
+language: cpp
+os:
+- linux
+branches:
+  only:
+  - master
+
+script:
+- cd $TRAVIS_BUILD_DIR/ci/travis;
+  ./install_googletest.sh;
+- cd $TRAVIS_BUILD_DIR/ci/travis;
+  ./install_rapidassist.sh;
+- cd $TRAVIS_BUILD_DIR/ci/travis;
+  ./build_library.sh;
+- cd $TRAVIS_BUILD_DIR/build/bin;
+  ./numbertowords_unittest || true; #do not fail build even if a test fails.
+
+after_success:
+- echo AFTER SUCCESS!
+
+notifications:
+  email: true

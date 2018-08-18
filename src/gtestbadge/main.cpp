@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include "BadgeEventListener.h"
+#include "gtestbadge/BadgeEventListener.h"
 
 int main(int argc, char **argv)
 {

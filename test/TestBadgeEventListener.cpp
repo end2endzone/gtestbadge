@@ -1,5 +1,5 @@
 #include "TestBadgeEventListener.h"
-#include "BadgeEventListener.h"
+#include "gtestbadge/BadgeEventListener.h"
 #include "rapid.h"
 
 std::vector<std::string> gTestFiles2;

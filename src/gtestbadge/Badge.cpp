@@ -1,4 +1,4 @@
-#include "Badge.h"
+#include "gtestbadge/Badge.h"
 #include "BadgeTemplate.h"
 #include "verdana.h"
 #include "rapid.h"
