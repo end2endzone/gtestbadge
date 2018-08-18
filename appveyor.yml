@@ -34,7 +34,7 @@ init:
   - ps: $env:GIT_HASH=$env:APPVEYOR_REPO_COMMIT.Substring(0, 10)
 
 # clone directory
-clone_folder: c:\projects\NumberToWords
+clone_folder: c:\projects\GTestBadge
 
 # scripts that run after cloning repository
 install:
@@ -77,5 +77,5 @@ test_script:
 #---------------------------------#
 
 artifacts:
-- path: .\build\bin\Release\numbertowords_unittest.x86.release.xml
-  name: numbertowordsTest.x86.release.xml
+- path: .\build\bin\Release\gtestbadge_unittest.x86.release.xml
+  name: gtestbadgeTest.x86.release.xml
