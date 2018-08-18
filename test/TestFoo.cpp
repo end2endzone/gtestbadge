@@ -7,6 +7,7 @@ void TestFoo::TearDown()
 {
 }
 
+/*
 TEST_F(TestFoo, DISABLED_test01)
 {
   ASSERT_TRUE(true);
@@ -47,3 +48,4 @@ TEST_F(TestFoo, test10)
 {
   ASSERT_TRUE(true);
 }
+*/

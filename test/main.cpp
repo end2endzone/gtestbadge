@@ -29,6 +29,7 @@
 #include <gtest/gtest.h>
 
 #include "rapidassist/gtesthelp.h"
+#include "rapidassist/filesystem.h"
 
 using namespace ra::gtesthelp;
 
@@ -52,6 +53,12 @@ int main(int argc, char **argv)
 
   ::testing::GTEST_FLAG(filter) = "*";
   ::testing::InitGoogleTest(&argc, argv);
+
+  //create 'tests' results output directory
+  if (!ra::filesystem::createFolder("tests"))
+  {
+    return 15;
+  }
 
   int wResult = RUN_ALL_TESTS(); //Find and run all tests
   return wResult; // returns 0 if all the tests are successful, or 1 otherwise
