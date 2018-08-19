@@ -199,7 +199,7 @@ install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION ${GTESTBADGE_INSTALL_
 install(FILES ${GTESTBADGE_EXPORT_HEADER}
               ${GTESTBADGE_VERSION_HEADER}
               ${GTESTBADGE_CONFIG_HEADER}
-              DESTINATION ${GTESTBADGE_INSTALL_INCLUDE_DIR})
+              DESTINATION ${GTESTBADGE_INSTALL_INCLUDE_DIR}/gtestbadge)
 install(EXPORT gtestbadge-targets DESTINATION ${GTESTBADGE_INSTALL_CMAKE_DIR})
 
 ##############################################################################################################################################
