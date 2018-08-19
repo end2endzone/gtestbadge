@@ -1,7 +1,10 @@
-#include "Badge.h"
+#include "gtestbadge/Badge.h"
 #include "BadgeTemplate.h"
 #include "verdana.h"
-#include "rapid.h"
+#include "rapidassist/strings.h"
+
+using ra::strings::toString;
+using ra::strings::strReplace;
 
 int getVerdanaTextWidth(const std::string & iStr, const int iFontSize)
 {
@@ -166,11 +169,11 @@ bool Badge::save(const std::string & iFilePath)
 
     //process replace in template
     icon = icon_template;
-    strReplace(icon, "{width}", toString(icon_width));
-    strReplace(icon, "{height}", toString(icon_height));
-    strReplace(icon, "{x}", toString(icon_x));
-    strReplace(icon, "{y}", toString(icon_y));
-    strReplace(icon, "{code}", mIcon);
+    strReplace(icon, "{width}", toString(icon_width).c_str());
+    strReplace(icon, "{height}", toString(icon_height).c_str());
+    strReplace(icon, "{x}", toString(icon_x).c_str());
+    strReplace(icon, "{y}", toString(icon_y).c_str());
+    strReplace(icon, "{code}", mIcon.c_str());
 
     //increase left padding if using an icon
     icon_offset = icon_padding + icon_width + icon_padding;
@@ -194,24 +197,24 @@ bool Badge::save(const std::string & iFilePath)
   strReplace(svg, "\r\n", "\n");
 
   //process with search and replace
-  strReplace(svg, "{width}", toString(total_width));
-  strReplace(svg, "{height}", toString(mHeight));
-  strReplace(svg, "{left.width}", toString(left_width));
-  strReplace(svg, "{right.width}", toString(right_width));
-  strReplace(svg, "{left.back_color}", mLeft.back_color);
-  strReplace(svg, "{right.back_color}", mRight.back_color);
-  strReplace(svg, "{left.front_color}", mLeft.front_color);
-  strReplace(svg, "{right.front_color}", mRight.front_color);
-  strReplace(svg, "{left.text.x}",  toString( mLeft.text_left_padding + mLeft.width/2 ));
-  strReplace(svg, "{right.text.x}", toString( left_width + mRight.text_left_padding + mRight.width/2 ));
-  strReplace(svg, "{left.text}", mLeft.text);
-  strReplace(svg, "{right.text}", mRight.text);
-  strReplace(svg, "{left.font_size}", toString(mLeft.font_size));
-  strReplace(svg, "{right.font_size}", toString(mRight.font_size));
-  strReplace(svg, "{left.shadow.height}", toString(left_shadow_height));
-  strReplace(svg, "{right.shadow.height}", toString(right_shadow_height));
-  strReplace(svg, "{left.text.height}", toString(left_text_height));
-  strReplace(svg, "{right.text.height}", toString(right_text_height));
+  strReplace(svg, "{width}", toString(total_width).c_str());
+  strReplace(svg, "{height}", toString(mHeight).c_str());
+  strReplace(svg, "{left.width}", toString(left_width).c_str());
+  strReplace(svg, "{right.width}", toString(right_width).c_str());
+  strReplace(svg, "{left.back_color}", mLeft.back_color.c_str());
+  strReplace(svg, "{right.back_color}", mRight.back_color.c_str());
+  strReplace(svg, "{left.front_color}", mLeft.front_color.c_str());
+  strReplace(svg, "{right.front_color}", mRight.front_color.c_str());
+  strReplace(svg, "{left.text.x}",  toString( mLeft.text_left_padding + mLeft.width/2 ).c_str());
+  strReplace(svg, "{right.text.x}", toString( left_width + mRight.text_left_padding + mRight.width/2 ).c_str());
+  strReplace(svg, "{left.text}", mLeft.text.c_str());
+  strReplace(svg, "{right.text}", mRight.text.c_str());
+  strReplace(svg, "{left.font_size}", toString(mLeft.font_size).c_str());
+  strReplace(svg, "{right.font_size}", toString(mRight.font_size).c_str());
+  strReplace(svg, "{left.shadow.height}", toString(left_shadow_height).c_str());
+  strReplace(svg, "{right.shadow.height}", toString(right_shadow_height).c_str());
+  strReplace(svg, "{left.text.height}", toString(left_text_height).c_str());
+  strReplace(svg, "{right.text.height}", toString(right_text_height).c_str());
 
   //replace icon within main svg
   strReplace(svg, "{icon}", icon.c_str());

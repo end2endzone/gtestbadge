@@ -7,6 +7,7 @@ void TestBar::TearDown()
 {
 }
 
+/*
 TEST_F(TestBar, test01)
 {
   ASSERT_TRUE(true);
@@ -23,3 +24,4 @@ TEST_F(TestBar, test04)
 {
   ASSERT_TRUE(true);
 }
+*/

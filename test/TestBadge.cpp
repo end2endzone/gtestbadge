@@ -1,6 +1,9 @@
 #include "TestBadge.h"
-#include "Badge.h"
-#include "rapid.h"
+#include "gtestbadge/Badge.h"
+#include "rapidassist/strings.h"
+#include "rapidassist/gtesthelp.h"
+
+using ra::strings::toString;
 
 std::vector<std::string> gTestFiles;
 std::string gTestFolder = "tests/";
@@ -60,7 +63,7 @@ void TestBadge::TearDown()
 
 TEST_F(TestBadge, testDefault)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -70,7 +73,7 @@ TEST_F(TestBadge, testDefault)
 
 TEST_F(TestBadge, testFull)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -95,7 +98,7 @@ TEST_F(TestBadge, testFull)
 
 TEST_F(TestBadge, testLeftTextLeftPadding)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -106,7 +109,7 @@ TEST_F(TestBadge, testLeftTextLeftPadding)
 
 TEST_F(TestBadge, testLeftTextRightPadding)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -117,7 +120,7 @@ TEST_F(TestBadge, testLeftTextRightPadding)
 
 TEST_F(TestBadge, testRightTextLeftPadding)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -128,7 +131,7 @@ TEST_F(TestBadge, testRightTextLeftPadding)
 
 TEST_F(TestBadge, testRightTextRightPadding)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -139,7 +142,7 @@ TEST_F(TestBadge, testRightTextRightPadding)
 
 TEST_F(TestBadge, testLeftText)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -150,7 +153,7 @@ TEST_F(TestBadge, testLeftText)
 
 TEST_F(TestBadge, testRightText)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -161,7 +164,7 @@ TEST_F(TestBadge, testRightText)
 
 TEST_F(TestBadge, testLeftWidth)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -172,7 +175,7 @@ TEST_F(TestBadge, testLeftWidth)
 
 TEST_F(TestBadge, testRightWidth)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -183,7 +186,7 @@ TEST_F(TestBadge, testRightWidth)
 
 TEST_F(TestBadge, testLeftBackColor)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -194,7 +197,7 @@ TEST_F(TestBadge, testLeftBackColor)
 
 TEST_F(TestBadge, testRightBackColor)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -205,7 +208,7 @@ TEST_F(TestBadge, testRightBackColor)
 
 TEST_F(TestBadge, testLeftFrontColor)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -216,7 +219,7 @@ TEST_F(TestBadge, testLeftFrontColor)
 
 TEST_F(TestBadge, testRightFrontColor)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -227,7 +230,7 @@ TEST_F(TestBadge, testRightFrontColor)
 
 TEST_F(TestBadge, testTestPassed)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -240,7 +243,7 @@ TEST_F(TestBadge, testTestPassed)
 
 TEST_F(TestBadge, testTestWarning)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -253,7 +256,7 @@ TEST_F(TestBadge, testTestWarning)
 
 TEST_F(TestBadge, testTestFailed)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -266,7 +269,7 @@ TEST_F(TestBadge, testTestFailed)
 
 TEST_F(TestBadge, testBuildPassed)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -279,7 +282,7 @@ TEST_F(TestBadge, testBuildPassed)
 
 TEST_F(TestBadge, testBuildFailed)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -292,7 +295,7 @@ TEST_F(TestBadge, testBuildFailed)
 
 TEST_F(TestBadge, testLicenseBadge)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -307,7 +310,7 @@ TEST_F(TestBadge, testLicenseBadge)
 
 TEST_F(TestBadge, testUnknown)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -319,7 +322,7 @@ TEST_F(TestBadge, testUnknown)
 
 TEST_F(TestBadge, testCoverage)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -332,7 +335,7 @@ TEST_F(TestBadge, testCoverage)
 
 TEST_F(TestBadge, testRightTextEmpty)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -344,7 +347,7 @@ TEST_F(TestBadge, testRightTextEmpty)
 
 TEST_F(TestBadge, testLeftTextEmpty)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -356,7 +359,7 @@ TEST_F(TestBadge, testLeftTextEmpty)
 
 TEST_F(TestBadge, testIcon)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -367,7 +370,7 @@ TEST_F(TestBadge, testIcon)
 
 TEST_F(TestBadge, testIconBig)
 {
-  const std::string filename = getTestQualifiedName() + ".svg";
+  const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
   gTestFiles.push_back(filename);
 
   Badge b;
@@ -381,7 +384,7 @@ TEST_F(TestBadge, testFontSize)
 {
   for(int font_size = 1; font_size <= 30; font_size++)
   {
-    const std::string filename = getTestQualifiedName() + "." + toString(font_size) + ".svg";
+    const std::string filename = ra::gtesthelp::getTestQualifiedName() + "." + toString(font_size) + ".svg";
     gTestFiles.push_back(filename);
 
     Badge b;
@@ -398,7 +401,7 @@ TEST_F(TestBadge, testHeight)
 {
   for(int height = 10; height <= 100; height+=10)
   {
-    const std::string filename = getTestQualifiedName() + "." + toString(height) + ".svg";
+    const std::string filename = ra::gtesthelp::getTestQualifiedName() + "." + toString(height) + ".svg";
     gTestFiles.push_back(filename);
 
     Badge b;
@@ -414,7 +417,7 @@ TEST_F(TestBadge, testIconSizes)
 {
   for(int height = 10; height <= 100; height+=10)
   {
-    const std::string filename = getTestQualifiedName() + "." + toString(height) + ".svg";
+    const std::string filename = ra::gtesthelp::getTestQualifiedName() + "." + toString(height) + ".svg";
     gTestFiles.push_back(filename);
 
     Badge b;
@@ -435,7 +438,7 @@ TEST_F(TestBadge, testMultipleSave)
 
   for(int i = 0; i < 5; i++)
   {
-    const std::string filename = getTestQualifiedName() + "." + toString(i) + ".svg";
+    const std::string filename = ra::gtesthelp::getTestQualifiedName() + "." + toString(i) + ".svg";
     gTestFiles.push_back(filename);
 
     bool saved = b.save(gTestFolder + filename);
