@@ -164,7 +164,7 @@ bool Badge::save(const std::string & iFilePath)
     const int icon_width = (mHeight*70)/100;
     const int icon_height = icon_width;
     const int icon_padding = (icon_width*15)/100;
-    const int icon_x = icon_padding; //0;//5 + icon_padding/2;
+    const int icon_x = icon_padding + 2;
     const int icon_y = mHeight/2 - icon_height/2;
 
     //process replace in template
