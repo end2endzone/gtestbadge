@@ -15,13 +15,6 @@ public:
     int text_right_padding;
   };
  
-  ///<summary>Enum for specifying left or right side for api functions.</summary>
-  enum BadgeSide
-  {
-    RIGHT_SIDE,
-    LEFT_SIZE,
-  };
-
   //constants
   static const int WIDTH_AUTO = -1;
   static const int HEIGHT_AUTO = -1;
@@ -34,8 +27,8 @@ public:
   ///<summary>dtor</summary>
   virtual ~Badge();
  
-  ///<summary>Sets the height in pixel.</summary>
-  ///<param name="size">The height in pixel. Set to HEIGHT_AUTO to automatically compute the appropriate height based on text font size.</param>
+  ///<summary>Sets the height in pixel of the badge.</summary>
+  ///<param name="size">The height in pixel of the badge. Set to HEIGHT_AUTO to automatically compute the appropriate height based on text font size.</param>
   void setHeight(int size);
  
   ///<summary>Assign an icon to the badge.</summary>
@@ -47,45 +40,70 @@ public:
   ///<returns>Returns true if the save is succesful. Returns false otherwise.</returns>
   bool save(const std::string & iFilePath);
  
-  ///<summary>Set the font size of the given side in pixel.</summary>
-  ///<param name="side">The side affected by the function call.</param>
+  //left side properties
+ 
+  ///<summary>Set the size of the left font in pixel.</summary>
   ///<param name="size">The size of the font in pixel.</param>
-  void setFontSize(const BadgeSide & side, int size);
+  void setLeftFontSize(int size);
  
-  ///<summary>Set the display text of the given side.</summary>
-  ///<param name="side">The side affected by the function call.</param>
-  ///<param name="text">The text to display on the given side.</param>
-  void setText(const BadgeSide & side, const std::string & text);
+  ///<summary>Set the text to display on the left side of the badge.</summary>
+  ///<param name="text">The text to display on the left side of the badge.</param>
+  void setLeftText(const std::string & text);
  
-  ///<summary>Set the width in pixel of the given side.</summary>
-  ///<param name="side">The side affected by the function call.</param>
-  ///<param name="width">The width in pixel of the given side.</param>
-  void setWidth(const BadgeSide & side, int width);
+  ///<summary>Set the width in pixel for the left side of the badge.</summary>
+  ///<param name="width">The width in pixel for the left side of the badge.</param>
+  void setLeftWidth(int width);
  
-  ///<summary>Set the background color of the given side.</summary>
-  ///<param name="side">The side affected by the function call.</param>
+  ///<summary>Set the background color for the left side of the badge.</summary>
   ///<param name="color">The color code in web format. ie `#3456a0`.</param>
-  void setBackgroundColor(const BadgeSide & side, const std::string & color);
+  void setLeftBackgroundColor(const std::string & color);
  
-  ///<summary>Set the foreground color of the given side.</summary>
-  ///<param name="side">The side affected by the function call.</param>
+  ///<summary>Set the foreground color for the left side of the badge.</summary>
   ///<param name="color">The color code in web format. ie `#3456a0`.</param>
-  void setForegroundColor(const BadgeSide & side, const std::string & color);
+  void setLeftForegroundColor(const std::string & color);
  
-  ///<summary>Set the left padding space in pixels of the text for the given side.</summary>
-  ///<param name="side">The side affected by the function call.</param>
+  ///<summary>Set the padding space in pixels left of the text for the left side of the badge.</summary>
   ///<param name="size">The padding size in pixels.</param>
-  void setTextLeftPadding(const BadgeSide & side, int size);
+  void setLeftTextLeftPadding(int size);
  
-  ///<summary>Set the right padding space in pixels of the text for the given side.</summary>
-  ///<param name="side">The side affected by the function call.</param>
+  ///<summary>Set the padding space in pixels right of the text for the left side of the badge.</summary>
   ///<param name="size">The padding size in pixels.</param>
-  void setTextRightPadding(const BadgeSide & side, int size);
+  void setLeftTextRightPadding(int size);
+ 
+  //right side properties
+ 
+  ///<summary>Set the size of the right font in pixel.</summary>
+  ///<param name="size">The size of the font in pixel.</param>
+  void setRightFontSize(int size);
+ 
+  ///<summary>Set the text to display on the right side of the badge.</summary>
+  ///<param name="text">The text to display on the right side of the badge.</param>
+  void setRightText(const std::string & text);
+ 
+  ///<summary>Set the width in pixel for the right side of the badge.</summary>
+  ///<param name="width">The width in pixel for the right side of the badge.</param>
+  void setRightWidth(int width);
+ 
+  ///<summary>Set the background color for the right side of the badge.</summary>
+  ///<param name="color">The color code in web format. ie `#3456a0`.</param>
+  void setRightBackgroundColor(const std::string & color);
+ 
+  ///<summary>Set the foreground color for the right side of the badge.</summary>
+  ///<param name="color">The color code in web format. ie `#3456a0`.</param>
+  void setRightForegroundColor(const std::string & color);
+ 
+  ///<summary>Set the padding space in pixels left of the text for the right side of the badge.</summary>
+  ///<param name="size">The padding size in pixels.</param>
+  void setRightTextLeftPadding(int size);
+ 
+  ///<summary>Set the padding space in pixels right of the text for the right side of the badge.</summary>
+  ///<param name="size">The padding size in pixels.</param>
+  void setRightTextRightPadding(int size);
  
   //inline getters
  
-  ///<summary>Get the height.</summary>
-  ///<returns>Returns the height.</returns>
+  ///<summary>Get the height of the badge.</summary>
+  ///<returns>Returns the height of the badge.</returns>
   int getHeight() const                               { return mHeight; }
  
   ///<summary>Get the icon string encoded in base64.</summary>
@@ -94,62 +112,62 @@ public:
  
   //inline getters for left side
  
-  ///<summary>Get the font size in pixels of the left side.</summary>
-  ///<returns>Returns the font size in pixels of the left side.</returns>
+  ///<summary>Get the font size in pixels of the left side of the badge.</summary>
+  ///<returns>Returns the font size in pixels of the left side of the badge.</returns>
   int getLeftFontSize() const                         { return mLeft.font_size; }
  
-  ///<summary>Get the text of the left side.</summary>
-  ///<returns>Returns the text of the left side.</returns>
+  ///<summary>Get the text of the left side of the badge.</summary>
+  ///<returns>Returns the text of the left side of the badge.</returns>
   const std::string & getLeftText() const             { return mLeft.text; }
  
-  ///<summary>Get the width of the left side.</summary>
-  ///<returns>Returns the width of the left side.</returns>
+  ///<summary>Get the width of the left side of the badge.</summary>
+  ///<returns>Returns the width of the left side of the badge.</returns>
   int getLeftWidth() const                            { return mLeft.width; }
  
-  ///<summary>Get the background color for the left side.</summary>
-  ///<returns>Returns the background color for the left side.</returns>
+  ///<summary>Get the background color for the left side of the badge.</summary>
+  ///<returns>Returns the background color for the left side of the badge.</returns>
   const std::string & getLeftBackgroundColor() const  { return mLeft.back_color; }
  
-  ///<summary>Get the foreground color for the left side.</summary>
-  ///<returns>Returns the foreground color for the left side.</returns>
+  ///<summary>Get the foreground color for the left side of the badge.</summary>
+  ///<returns>Returns the foreground color for the left side of the badge.</returns>
   const std::string & getLeftForegroundColor() const  { return mLeft.front_color; }
  
-  ///<summary>Get the padding space in pixels left of the text for the left side.</summary>
-  ///<returns>Returns the padding space in pixels left of the text for the left side.</returns>
+  ///<summary>Get the padding space in pixels left of the text for the left side of the badge.</summary>
+  ///<returns>Returns the padding space in pixels left of the text for the left side of the badge.</returns>
   int getLeftTextLeftPadding() const                  { return mLeft.text_left_padding; }
  
-  ///<summary>Get the padding space in pixels right of the text for the left side.</summary>
-  ///<returns>Returns the padding space in pixels right of the text for the left side.</returns>
+  ///<summary>Get the padding space in pixels right of the text for the left side of the badge.</summary>
+  ///<returns>Returns the padding space in pixels right of the text for the left side of the badge.</returns>
   int getLeftTextRightPadding() const                 { return mLeft.text_right_padding; }
  
   //inline getters for right side
  
-  ///<summary>Get the font size in pixels of the right side.</summary>
-  ///<returns>Returns the font size in pixels of the right side.</returns>
+  ///<summary>Get the font size in pixels of the right side of the badge.</summary>
+  ///<returns>Returns the font size in pixels of the right side of the badge.</returns>
   int getRightFontSize() const                         { return mRight.font_size; }
  
-  ///<summary>Get the text of the right side.</summary>
-  ///<returns>Returns the text of the right side.</returns>
+  ///<summary>Get the text of the right side of the badge.</summary>
+  ///<returns>Returns the text of the right side of the badge.</returns>
   const std::string & getRightText() const             { return mRight.text; }
  
-  ///<summary>Get the width of the right side.</summary>
-  ///<returns>Returns the width of the right side.</returns>
+  ///<summary>Get the width of the right side of the badge.</summary>
+  ///<returns>Returns the width of the right side of the badge.</returns>
   int getRightWidth() const                            { return mRight.width; }
  
-  ///<summary>Get the background color for the right side.</summary>
-  ///<returns>Returns the background color for the right side.</returns>
+  ///<summary>Get the background color for the right side of the badge.</summary>
+  ///<returns>Returns the background color for the right side of the badge.</returns>
   const std::string & getRightBackgroundColor() const  { return mRight.back_color; }
  
-  ///<summary>Get the foreground color for the right side.</summary>
-  ///<returns>Returns the foreground color for the right side.</returns>
+  ///<summary>Get the foreground color for the right side of the badge.</summary>
+  ///<returns>Returns the foreground color for the right side of the badge.</returns>
   const std::string & getRightForegroundColor() const  { return mRight.front_color; }
  
- ///<summary>Get the padding space in pixels left of the text for the right side.</summary>
-  ///<returns>Returns the padding space in pixels left of the text for the right side.</returns>
+ ///<summary>Get the padding space in pixels left of the text for the right side of the badge.</summary>
+  ///<returns>Returns the padding space in pixels left of the text for the right side of the badge.</returns>
   int getRightTextLeftPadding() const                  { return mRight.text_left_padding; }
  
-  ///<summary>Get the padding space in pixels right of the text for the right side.</summary>
-  ///<returns>Returns the padding space in pixels right of the text for the right side.</returns>
+  ///<summary>Get the padding space in pixels right of the text for the right side of the badge.</summary>
+  ///<returns>Returns the padding space in pixels right of the text for the right side of the badge.</returns>
   int getRightTextRightPadding() const                 { return mRight.text_right_padding; }
  
   //whole side getters
