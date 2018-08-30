@@ -72,7 +72,7 @@ void BadgeEventListener::OnTestProgramEnd(const UnitTest& unit_test)
   int numRun = unit_test.test_to_run_count();
   int numTotalTests = unit_test.total_test_count();
 
-  bool success = generateBadge(mOutputFilename, mWarningRatio, numSuccess, numFailed, numDisabled, ICON_NONE);
+  bool success = generateBadge(mOutputFilename, numSuccess, numFailed, numDisabled, ICON_NONE, mWarningRatio);
 }
 
 void BadgeEventListener::setOutputFilename(const std::string & iFilename)
@@ -82,10 +82,10 @@ void BadgeEventListener::setOutputFilename(const std::string & iFilename)
 
 bool BadgeEventListener::generateBadge(const std::string & iFilename, int success, int failures, int disabled, const SYSTEM_ICON & iIcon)
 {
-  return generateBadge(iFilename, DEFAULT_WARNING_RATIO, success, failures, disabled, iIcon);
+  return generateBadge(iFilename, success, failures, disabled, iIcon, DEFAULT_WARNING_RATIO);
 }
 
-bool BadgeEventListener::generateBadge(const std::string & iFilename, const double & iWarningRatio, int success, int failures, int disabled, const SYSTEM_ICON & iIcon)
+bool BadgeEventListener::generateBadge(const std::string & iFilename, int success, int failures, int disabled, const SYSTEM_ICON & iIcon, const double & iWarningRatio)
 {
   int total = success + failures;
 
