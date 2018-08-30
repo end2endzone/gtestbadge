@@ -72,7 +72,11 @@ void BadgeEventListener::OnTestProgramEnd(const UnitTest& unit_test)
   int numRun = unit_test.test_to_run_count();
   int numTotalTests = unit_test.total_test_count();
 
-  bool success = generateBadge(mOutputFilename, numSuccess, numFailed, numDisabled, ICON_NONE, mWarningRatio);
+  //validate filename provided
+  if (!mOutputFilename.empty())
+  {
+    bool success = generateBadge(mOutputFilename, numSuccess, numFailed, numDisabled, ICON_NONE, mWarningRatio);
+  }
 }
 
 void BadgeEventListener::setOutputFilename(const std::string & iFilename)
