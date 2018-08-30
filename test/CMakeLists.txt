@@ -3,6 +3,8 @@ add_executable(gtestbadge_unittest
   ${GTESTBADGE_VERSION_HEADER}
   ${GTESTBADGE_CONFIG_HEADER}
   main.cpp
+  ImageListBuilder.cpp
+  ImageListBuilder.h
   TestBadge.cpp
   TestBadge.h
   TestBadgeEventListener.cpp

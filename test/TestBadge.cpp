@@ -2,10 +2,11 @@
 #include "gtestbadge/Badge.h"
 #include "rapidassist/strings.h"
 #include "rapidassist/gtesthelp.h"
+#include "ImageListBuilder.h"
 
 using ra::strings::toString;
 
-std::vector<std::string> gTestFiles;
+ImageListBuilder gTestBadgeBuilder;
 std::string gTestFolder = "tests/";
 
 const char * ICON_CC_SAMPLING   = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMC8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+PHN2ZyB2ZXJzaW9uPSIxLjAiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCIgdmlld0JveD0iNS41IC0zLjUgNjQgNjQiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgNS41IC0zLjUgNjQgNjQiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxjaXJjbGUgZmlsbD0iI0ZGRkZGRiIgY3g9IjM4LjA1IiBjeT0iMjguNDY4IiByPSIyOS40ODIiLz48Zz48cGF0aCBkPSJNMzcuNDQzLTMuNWM4Ljk4OCwwLDE2LjU4LDMuMDk2LDIyLjc3LDkuMjg2QzY2LjQwNCwxMS45NzYsNjkuNSwxOS41NDcsNjkuNSwyOC41YzAsOC45NTQtMy4wNDksMTYuNDM3LTkuMTQ1LDIyLjQ1NiBDNTMuOTE4LDU3LjMxOSw0Ni4yNzksNjAuNSwzNy40NDMsNjAuNWMtOC42ODcsMC0xNi4xODItMy4xNDQtMjIuNDg2LTkuNDNDOC42NTEsNDQuNzg0LDUuNSwzNy4yNjIsNS41LDI4LjUgYzAtOC43NjEsMy4xNDQtMTYuMzQyLDkuNDI5LTIyLjc0MkMyMS4xMDEtMC40MTUsMjguNjA0LTMuNSwzNy40NDMtMy41eiBNMzcuNTI5LDIuMjcyYy03LjI1NywwLTEzLjQwMSwyLjU1My0xOC40MjgsNy42NTcgYy01LjIyLDUuMjk2LTcuODI5LDExLjQ4Ni03LjgyOSwxOC41NzJzMi41OSwxMy4yMiw3Ljc3MSwxOC4zOThjNS4xODEsNS4xODIsMTEuMzUyLDcuNzcxLDE4LjUxNCw3Ljc3MSBjNy4xNjIsMCwxMy4zNzEtMi42MDcsMTguNjI5LTcuODI4YzUuMDI5LTQuODc3LDcuNTQzLTEwLjk5MSw3LjU0My0xOC4zNDNjMC03LjMxNC0yLjU1My0xMy41MDQtNy42NTYtMTguNTcxIEM1MC45NjcsNC44MjQsNDQuNzg1LDIuMjcyLDM3LjUyOSwyLjI3MnogTTM4LjAxNCw5LjEyOGMwLjM4MS0wLjAzOCwwLjcxNSwwLjA2NywxLjAwMiwwLjMxNCBjMC4yODUsMC4yNDksMC40NDUsMC41NjMsMC40ODQsMC45NDN2MC4yMjlsMC44NTcsMTMuODI4bDAuNjI5LTcuNjU3YzAtMC4zODEsMC4xMzMtMC43MDUsMC4zOTgtMC45NzFzMC41OTItMC40MDEsMC45NzEtMC40MDEgYzAuMzgxLDAsMC43MDUsMC4xMzQsMC45NzMsMC40MDFjMC4yNjYsMC4yNjcsMC40LDAuNTksMC40LDAuOTcxdjAuMjI4bDAuNzQsMTAuMjg2bDAuNzQ0LTguMjg1IGMwLjAzNy0wLjM0MiwwLjE4Mi0wLjYyOSwwLjQzLTAuODU3YzAuMjQ2LTAuMjI5LDAuNTQxLTAuMzQyLDAuODg1LTAuMzQyczAuNjQ4LDAuMTA2LDAuOTE0LDAuMzE0IGMwLjI2OCwwLjIxLDAuNDIsMC40ODYsMC40NTksMC44MjlsMS40ODYsMTIuNDU3bDAuNjg2LTEuNjU3YzAuMjI5LTAuNTcyLDAuNjY2LTAuODU4LDEuMzEyLTAuODU4aDcuNDg2djIuNzQ0aC02LjU3MiBsLTIuMzQyLDUuNzE0Yy0wLjI2OCwwLjY4NS0wLjc2NCwwLjk3Mi0xLjQ4NiwwLjg1NmMtMC4zNDItMC4wMzgtMC42MTktMC4xNzItMC44MjgtMC40cy0wLjMzNC0wLjUxNC0wLjM3MS0wLjg1N2wtMC41MTQtNC4xMTQgbC0wLjk3MSwxMS45NDJjLTAuMDM5LDAuMzQxLTAuMTgyLDAuNjI4LTAuNDMsMC44NTZzLTAuNTQzLDAuMzQzLTAuODg3LDAuMzQzYy0wLjM0MiwwLTAuNjQ2LTAuMTE0LTAuOTE0LTAuMzQzIGMtMC4yNjYtMC4yMjktMC40MTgtMC41MTMtMC40NTctMC44NTZ2LTAuMTcybC0wLjc5OS05Ljg4NmwtMC42ODYsOS4zMTVjLTAuMDc4LDAuMzQyLTAuMjQsMC42MjktMC40ODYsMC44NTcgYy0wLjI0OCwwLjIyOS0wLjU0MywwLjM0Mi0wLjg4NywwLjM0MmMtMC4zNDIsMC0wLjY0OC0wLjExMy0wLjkxNC0wLjM0MnMtMC40Mi0wLjUxNS0wLjQ1Ny0wLjg1N1Y0My44N2wtMC43NDQtMTEuMTQzIGwtMC43NDIsMTIuMjI5djAuMTcyYzAsMC4zODItMC4xMzUsMC43MTMtMC40LDAuOTk5cy0wLjU5LDAuNDMtMC45NzEsMC40M2MtMC4zODMsMC0wLjcwNS0wLjE0NC0wLjk3MS0wLjQzIGMtMC4yNjgtMC4yODYtMC40MDItMC42MTctMC40MDItMC45OTl2LTAuMTE1bC0wLjc0Mi0xMS4zMTNsLTAuNjg2LDEwLjkxNHYwLjE3MWMtMC4wNzcsMC4zNDQtMC4yMzgsMC42My0wLjQ4NSwwLjg1NyBjLTAuMjQ4LDAuMjI5LTAuNTQzLDAuMzQzLTAuODg1LDAuMzQzcy0wLjY0OC0wLjExNC0wLjkxNC0wLjM0M2MtMC4yNjctMC4yMjgtMC40MTktMC41MTQtMC40NTgtMC44NTd2LTAuMTcxaC0wLjA1NnYtMC4xNyBsLTAuOC0xMS40MjhsLTAuNjI5LDcuMzEzYy0wLjAzOCwwLjM0NC0wLjE5MSwwLjYzLTAuNDU3LDAuODU3Yy0wLjI2NywwLjIyOS0wLjU3MSwwLjM0NC0wLjkxNCwwLjM0NCBjLTAuMzQzLDAtMC42MzktMC4xMDUtMC44ODctMC4zMTVjLTAuMjQ4LTAuMjA4LTAuNDEtMC40ODUtMC40ODYtMC44MjhsLTEuNDI5LTkuODI4bC0wLjE3MSwwLjM0MSBjLTAuMjI4LDAuNDk2LTAuNjQ4LDAuNzQ0LTEuMjU4LDAuNzQ0aC02LjYyOFYyOC45aDUuNzcybDEuNzcxLTMuNmMwLjI2Ny0wLjYwOSwwLjczMi0wLjg2NywxLjQtMC43NzIgYzAuNjY2LDAuMDk1LDEuMDU3LDAuNDY3LDEuMTcxLDEuMTE0bDAuNCwyLjYyOGwxLjA4NS0xMi42MjhjMC0wLjM4MSwwLjEzMy0wLjcwNSwwLjQtMC45NzFzMC41OS0wLjQwMSwwLjk3MS0wLjQwMSBzMC43MDQsMC4xMzQsMC45NzEsMC40MDFjMC4yNjcsMC4yNjcsMC4zOTksMC41OSwwLjM5OSwwLjk3MXYwLjIyOGwwLjYyOSw4LjkxNWwwLjg1Ny0xMS45NDJ2LTAuMTcxIGMwLjAzNy0wLjM0MywwLjE4LTAuNjI5LDAuNDI4LTAuODU3YzAuMjQ3LTAuMjI4LDAuNTQyLTAuMzQyLDAuODg2LTAuMzQyczAuNjQ4LDAuMTE0LDAuOTE0LDAuMzQyIGMwLjI2OCwwLjIyOSwwLjQxOCwwLjUxNCwwLjQ1NywwLjg1N3YwLjE3MWwwLjY4NiwxMC40bDAuODAxLTEyLjYyOHYtMC4yMjljMC0wLjM0MiwwLjEyMy0wLjYyOSwwLjM3MS0wLjg1NyBDMzcuMzc1LDkuMywzNy42Nyw5LjE2NywzOC4wMTQsOS4xMjh6Ii8+PC9nPjwvZz48L3N2Zz4=";
@@ -19,38 +20,8 @@ void TestBadge::SetUpTestCase()
 void TestBadge::TearDownTestCase()
 {
   //build an HTML file viewer
-
   const std::string filename = gTestFolder + /*getTestSuiteName()*/ "TestBadge" + ".html";
-  FILE * f = fopen(filename.c_str(), "w");
-  if (!f)
-    return;
-
-  //print header
-  fputs(""
-"<html>\n"
-"<head></head>\n"
-"<body>\n"
-"  <table>\n"
-"    <tbody>\n"
-"      <td>File</td>\n"
-"      <td>Image</td>\n"
-"    </tbody>\n"
-, f);
-
-  for(size_t i=0; i<gTestFiles.size(); i++)
-  {
-    const std::string & testFile = gTestFiles[i];
-    fprintf(f, "    <tr><td><a href=\"%s\">%s</a></td><td><img src=\"%s\" /></td></tr>\n", testFile.c_str(), testFile.c_str(), testFile.c_str());
-  }
-
-  //print footer
-  fputs(""
-"  </table>\n"
-"</body>\n"
-"</html>\n"
-, f);
-
-  fclose(f);
+  ASSERT_TRUE( gTestBadgeBuilder.save(filename) );
 }
 
 void TestBadge::SetUp()
@@ -64,7 +35,7 @@ void TestBadge::TearDown()
 TEST_F(TestBadge, testDefault)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   bool saved = b.save(gTestFolder + filename);
@@ -74,7 +45,7 @@ TEST_F(TestBadge, testDefault)
 TEST_F(TestBadge, testFull)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setHeight(60);
@@ -99,7 +70,7 @@ TEST_F(TestBadge, testFull)
 TEST_F(TestBadge, testLeftTextLeftPadding)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setLeftTextLeftPadding(50);
@@ -110,7 +81,7 @@ TEST_F(TestBadge, testLeftTextLeftPadding)
 TEST_F(TestBadge, testLeftTextRightPadding)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setLeftTextRightPadding(50);
@@ -121,7 +92,7 @@ TEST_F(TestBadge, testLeftTextRightPadding)
 TEST_F(TestBadge, testRightTextLeftPadding)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightTextLeftPadding(50);
@@ -132,7 +103,7 @@ TEST_F(TestBadge, testRightTextLeftPadding)
 TEST_F(TestBadge, testRightTextRightPadding)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightTextRightPadding(50);
@@ -143,7 +114,7 @@ TEST_F(TestBadge, testRightTextRightPadding)
 TEST_F(TestBadge, testLeftText)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setLeftText("foo");
@@ -154,7 +125,7 @@ TEST_F(TestBadge, testLeftText)
 TEST_F(TestBadge, testRightText)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightText("bar");
@@ -165,7 +136,7 @@ TEST_F(TestBadge, testRightText)
 TEST_F(TestBadge, testLeftWidth)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setLeftWidth(300);
@@ -176,7 +147,7 @@ TEST_F(TestBadge, testLeftWidth)
 TEST_F(TestBadge, testRightWidth)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightWidth(300);
@@ -187,7 +158,7 @@ TEST_F(TestBadge, testRightWidth)
 TEST_F(TestBadge, testLeftBackColor)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setLeftBackgroundColor("#0f0");
@@ -198,7 +169,7 @@ TEST_F(TestBadge, testLeftBackColor)
 TEST_F(TestBadge, testRightBackColor)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightBackgroundColor("#00f");
@@ -209,7 +180,7 @@ TEST_F(TestBadge, testRightBackColor)
 TEST_F(TestBadge, testLeftFrontColor)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setLeftForegroundColor("#0f0");
@@ -220,7 +191,7 @@ TEST_F(TestBadge, testLeftFrontColor)
 TEST_F(TestBadge, testRightFrontColor)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightForegroundColor("#00f");
@@ -231,7 +202,7 @@ TEST_F(TestBadge, testRightFrontColor)
 TEST_F(TestBadge, testTestPassed)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightBackgroundColor("#4c1"); //brightgreen
@@ -244,7 +215,7 @@ TEST_F(TestBadge, testTestPassed)
 TEST_F(TestBadge, testTestWarning)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightBackgroundColor("#fe7d37");  //orange
@@ -257,7 +228,7 @@ TEST_F(TestBadge, testTestWarning)
 TEST_F(TestBadge, testTestFailed)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightBackgroundColor("#e05d44");  //red
@@ -270,7 +241,7 @@ TEST_F(TestBadge, testTestFailed)
 TEST_F(TestBadge, testBuildPassed)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightBackgroundColor("#4c1"); //brightgreen
@@ -283,7 +254,7 @@ TEST_F(TestBadge, testBuildPassed)
 TEST_F(TestBadge, testBuildFailed)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightBackgroundColor("#e05d44");  //red
@@ -296,7 +267,7 @@ TEST_F(TestBadge, testBuildFailed)
 TEST_F(TestBadge, testLicenseBadge)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightBackgroundColor("#ffc90e"); //gold
@@ -311,7 +282,7 @@ TEST_F(TestBadge, testLicenseBadge)
 TEST_F(TestBadge, testUnknown)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setLeftText("Unknown");
@@ -323,7 +294,7 @@ TEST_F(TestBadge, testUnknown)
 TEST_F(TestBadge, testCoverage)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setRightBackgroundColor("#e05d44");  //red
@@ -336,7 +307,7 @@ TEST_F(TestBadge, testCoverage)
 TEST_F(TestBadge, testRightTextEmpty)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setLeftText("right empty");
@@ -348,7 +319,7 @@ TEST_F(TestBadge, testRightTextEmpty)
 TEST_F(TestBadge, testLeftTextEmpty)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setLeftText("");
@@ -360,7 +331,7 @@ TEST_F(TestBadge, testLeftTextEmpty)
 TEST_F(TestBadge, testIcon)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setBase64Icon(ICON_CC_SAMPLING);
@@ -371,7 +342,7 @@ TEST_F(TestBadge, testIcon)
 TEST_F(TestBadge, testIconBig)
 {
   const std::string filename = ra::gtesthelp::getTestQualifiedName() + ".svg";
-  gTestFiles.push_back(filename);
+  gTestBadgeBuilder.addImage(filename);
 
   Badge b;
   b.setBase64Icon(ICON_CC_SHARE);
@@ -385,7 +356,7 @@ TEST_F(TestBadge, testFontSize)
   for(int font_size = 1; font_size <= 30; font_size++)
   {
     const std::string filename = ra::gtesthelp::getTestQualifiedName() + "." + toString(font_size) + ".svg";
-    gTestFiles.push_back(filename);
+    gTestBadgeBuilder.addImage(filename);
 
     Badge b;
     b.setHeight(Badge::HEIGHT_AUTO);
@@ -402,7 +373,7 @@ TEST_F(TestBadge, testHeight)
   for(int height = 10; height <= 100; height+=10)
   {
     const std::string filename = ra::gtesthelp::getTestQualifiedName() + "." + toString(height) + ".svg";
-    gTestFiles.push_back(filename);
+    gTestBadgeBuilder.addImage(filename);
 
     Badge b;
     b.setHeight(height);
@@ -418,7 +389,7 @@ TEST_F(TestBadge, testIconSizes)
   for(int height = 10; height <= 100; height+=10)
   {
     const std::string filename = ra::gtesthelp::getTestQualifiedName() + "." + toString(height) + ".svg";
-    gTestFiles.push_back(filename);
+    gTestBadgeBuilder.addImage(filename);
 
     Badge b;
     b.setHeight(height);
@@ -439,7 +410,7 @@ TEST_F(TestBadge, testMultipleSave)
   for(int i = 0; i < 5; i++)
   {
     const std::string filename = ra::gtesthelp::getTestQualifiedName() + "." + toString(i) + ".svg";
-    gTestFiles.push_back(filename);
+    gTestBadgeBuilder.addImage(filename);
 
     bool saved = b.save(gTestFolder + filename);
     ASSERT_TRUE(saved);
