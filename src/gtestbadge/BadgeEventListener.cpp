@@ -109,7 +109,7 @@ bool BadgeEventListener::generateBadge(const std::string & iFilename, int succes
   }
 
   //define badge color
-  char * color = NULL;
+  const char * color = NULL;
   switch(level)
   {
   case LEVEL_SUCCESS:
