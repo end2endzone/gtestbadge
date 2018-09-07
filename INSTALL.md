@@ -79,8 +79,10 @@ The following table shows the available build option:
 
 | Name | Type | Default | Usage |
 |------|------|:-------:|-------|
-| CMAKE_INSTALL_PREFIX   | STRING | See CMake documentation | Defines the installation folder of the library.           |
-| BUILD_SHARED_LIBS      | BOOL   | OFF                     | Enable/disable the generation of shared library makefiles |
+| CMAKE_INSTALL_PREFIX     | STRING | See CMake documentation | Defines the installation folder of the library.            |
+| BUILD_SHARED_LIBS        | BOOL   | OFF                     | Enable/disable the generation of shared library makefiles  |
+| GTESTBADGE_BUILD_TEST    | BOOL   | OFF                     | Enable/disable the generation of unit tests target.        |
+| GTESTBADGE_BUILD_SAMPLES | BOOL   | OFF                     | Build all samples projects                                 |
 
 To enable a build option, run the following command at the cmake configuration time:
 ```cmake

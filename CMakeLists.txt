@@ -97,7 +97,7 @@ set(GTESTBADGE_INSTALL_CMAKE_DIR    ${GTESTBADGE_INSTALL_LIB_DIR}) # CMake files
 
 # Build options
 option(GTESTBADGE_BUILD_TEST "Build all GTestBadge's unit tests" OFF)
-option(GTESTBADGE_BUILD_DOC "Build documentation" OFF)
+option(GTESTBADGE_BUILD_SAMPLES "Build samples generator" OFF)
 
 # Force a debug postfix if none specified.
 # This allows publishing both release and debug binaries to the same location
@@ -129,6 +129,11 @@ find_package(rapidassist 0.4.0 REQUIRED)
 ##############################################################################################################################################
 
 add_subdirectory(src/gtestbadge)
+
+# samples
+if(GTESTBADGE_BUILD_SAMPLES)
+  add_subdirectory(samples)
+endif()
 
 # unit tests
 if(GTESTBADGE_BUILD_TEST)
