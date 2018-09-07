@@ -10,6 +10,7 @@ class BadgeEventListener : public ::testing::TestEventListener
 {
 public:
   BadgeEventListener();
+  BadgeEventListener(const std::string & iFilename);
   virtual ~BadgeEventListener();
 
   //TestEventListener methods

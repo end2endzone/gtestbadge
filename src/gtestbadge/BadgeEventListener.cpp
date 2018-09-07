@@ -8,7 +8,12 @@ const double BadgeEventListener::DEFAULT_WARNING_RATIO = 0.10;
 
 BadgeEventListener::BadgeEventListener()
 {
-  mOutputFilename = "badge.svg";
+  mWarningRatio = DEFAULT_WARNING_RATIO;
+}
+
+BadgeEventListener::BadgeEventListener(const std::string & iFilename)
+{
+  mOutputFilename = iFilename;
   mWarningRatio = DEFAULT_WARNING_RATIO;
 }
 
@@ -76,6 +81,14 @@ void BadgeEventListener::OnTestProgramEnd(const UnitTest& unit_test)
   if (!mOutputFilename.empty())
   {
     bool success = generateBadge(mOutputFilename, numSuccess, numFailed, numDisabled, ICON_NONE, mWarningRatio);
+    if (!success)
+    {
+      printf("BadgeEventListener: [ERROR] Failed saving '%s' test result badge\n", mOutputFilename.c_str());
+    }
+  }
+  else
+  {
+    printf("BadgeEventListener: [WARNING] Badge filename not specified. Skipping badge creation.\n");
   }
 }
 
