@@ -6,15 +6,19 @@ using ra::strings::toString;
 
 const double BadgeEventListener::DEFAULT_WARNING_RATIO = 0.10;
 
-BadgeEventListener::BadgeEventListener()
+BadgeEventListener::BadgeEventListener() :
+  mSilent(false),
+  mSuccess(false),
+  mWarningRatio(DEFAULT_WARNING_RATIO)
 {
-  mWarningRatio = DEFAULT_WARNING_RATIO;
 }
 
-BadgeEventListener::BadgeEventListener(const std::string & iFilename)
+BadgeEventListener::BadgeEventListener(const std::string & iFilename) :
+  mSilent(false),
+  mSuccess(false),
+  mWarningRatio(DEFAULT_WARNING_RATIO),
+  mOutputFilename(iFilename)
 {
-  mOutputFilename = iFilename;
-  mWarningRatio = DEFAULT_WARNING_RATIO;
 }
 
 BadgeEventListener::~BadgeEventListener()
@@ -77,16 +81,16 @@ void BadgeEventListener::OnTestProgramEnd(const UnitTest& unit_test)
   int numRun = unit_test.test_to_run_count();
   int numTotalTests = unit_test.total_test_count();
 
-  //validate filename provided
+  //validate filename
   if (!mOutputFilename.empty())
   {
-    bool success = generateBadge(mOutputFilename, numSuccess, numFailed, numDisabled, ICON_NONE, mWarningRatio);
-    if (!success)
+    mSuccess = generateBadge(mOutputFilename, numSuccess, numFailed, numDisabled, ICON_NONE, mWarningRatio);
+    if (!mSuccess && !mSilent)
     {
-      printf("BadgeEventListener: [ERROR] Failed saving '%s' test result badge\n", mOutputFilename.c_str());
+      printf("BadgeEventListener: [ERROR] Failed saving '%s' test result badge.\n", mOutputFilename.c_str());
     }
   }
-  else
+  else if (!mSilent)
   {
     printf("BadgeEventListener: [WARNING] Badge filename not specified. Skipping badge creation.\n");
   }
@@ -95,6 +99,11 @@ void BadgeEventListener::OnTestProgramEnd(const UnitTest& unit_test)
 void BadgeEventListener::setOutputFilename(const std::string & iFilename)
 {
   mOutputFilename = iFilename;
+}
+
+void BadgeEventListener::setSilentOutput(bool iSilent)
+{
+  mSilent = iSilent;
 }
 
 bool BadgeEventListener::generateBadge(const std::string & iFilename, int success, int failures, int disabled, const SYSTEM_ICON & iIcon)

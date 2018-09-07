@@ -36,12 +36,26 @@ public:
   ///<returns>Returns the output file path used for saving.</returns>
   const std::string & getOutputFilename() const { return mOutputFilename; }
  
+  ///<summary>Enable or disable warnings and errors messages on the console.</summary>
+  ///<param name="iSilent">True to disable warnings/errors messages on the console.</param>
+  void setSilentOutput(bool iSilent);
+ 
+  ///<summary>Get if warnings and errors messages are enabled or disabled.</summary>
+  ///<returns>Returns true if warnings/errors messages on the console are disable. Returns false otherwise.</returns>
+  bool isSilentOutput() const { return mSilent; }
+ 
+  ///<summary>Returns the badge creation success flag.</summary>
+  ///<returns>Returns true if the badge was created. Returns false otherwise.</returns>
+  bool getSuccess() const { return mSuccess; }
+ 
   ///<summary>
   ///Set the warning ratio.
   ///The warning ratio defines the number of test failures at which the badge shows a red background instead of an orange background.
   ///The ratio must be between 0 and 1.
-  ///For instance, set the ratio to 0.1 to show a red background if 10% or more of test fails.
-  ///Set to 0 to disable the 'warning' badge functionality.
+  ///For instance:
+  ///  Set the ratio to 0.1 to show a red background if 10% or more of test fails.
+  ///  Set the ratio to 0.3 to show the `warning` badge if less than 30% of test fails. Else, show the `failed` badge type.
+  ///  Set to 0.0 to disable the 'warning' badge functionality.
   ///</summary>
   ///<param name="ratio">The warning ratio from 0 to 1.</param>
   void setWarningRatio(double ratio);
@@ -83,4 +97,6 @@ public:
 private:
   std::string mOutputFilename;
   double mWarningRatio;
+  bool mSilent;
+  bool mSuccess;
 };
