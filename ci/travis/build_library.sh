@@ -18,7 +18,7 @@ echo ===========================================================================
 cd $TRAVIS_BUILD_DIR
 mkdir -p build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=$INSTALL_LOCATION -DGTESTBADGE_BUILD_TEST=ON ..
+cmake -DCMAKE_INSTALL_PREFIX=$INSTALL_LOCATION -DGTESTBADGE_BUILD_TEST=ON -DGTESTBADGE_BUILD_SAMPLES=ON ..
 
 echo ============================================================================
 echo Compiling...
