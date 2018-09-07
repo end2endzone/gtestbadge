@@ -1,4 +1,5 @@
 #include "ImageListBuilder.h"
+#include <cstdio> //for fopen()
 
 ImageListBuilder::ImageListBuilder()
 {
