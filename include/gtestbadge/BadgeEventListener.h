@@ -58,7 +58,7 @@ public:
   ///  Set to 0.0 to disable the 'warning' badge functionality.
   ///</summary>
   ///<param name="ratio">The warning ratio from 0 to 1.</param>
-  void setWarningRatio(double ratio);
+  void setWarningRatio(double iRatio);
  
   ///<summary>Get the warning ratio.</summary>
   ///<returns>Returns the warning ratio.</returns>

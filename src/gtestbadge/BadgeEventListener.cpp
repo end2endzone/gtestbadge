@@ -106,6 +106,11 @@ void BadgeEventListener::setSilent(bool iSilent)
   mSilent = iSilent;
 }
 
+void BadgeEventListener::setWarningRatio(double iRatio)
+{
+  mWarningRatio = iRatio;
+}
+
 bool BadgeEventListener::generateBadge(const std::string & iFilename, int success, int failures, int disabled, const SYSTEM_ICON & iIcon)
 {
   return generateBadge(iFilename, success, failures, disabled, iIcon, DEFAULT_WARNING_RATIO);
