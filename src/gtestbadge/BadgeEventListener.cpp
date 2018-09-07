@@ -101,7 +101,7 @@ void BadgeEventListener::setOutputFilename(const std::string & iFilename)
   mOutputFilename = iFilename;
 }
 
-void BadgeEventListener::setSilentOutput(bool iSilent)
+void BadgeEventListener::setSilent(bool iSilent)
 {
   mSilent = iSilent;
 }

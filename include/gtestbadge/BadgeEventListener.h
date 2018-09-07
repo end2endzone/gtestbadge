@@ -36,13 +36,13 @@ public:
   ///<returns>Returns the output file path used for saving.</returns>
   const std::string & getOutputFilename() const { return mOutputFilename; }
  
-  ///<summary>Enable or disable warnings and errors messages on the console.</summary>
+  ///<summary>Sets the 'silent' flag.</summary>
   ///<param name="iSilent">True to disable warnings/errors messages on the console.</param>
-  void setSilentOutput(bool iSilent);
+  void setSilent(bool iSilent);
  
-  ///<summary>Get if warnings and errors messages are enabled or disabled.</summary>
+  ///<summary>Provides the 'silent' flag.</summary>
   ///<returns>Returns true if warnings/errors messages on the console are disable. Returns false otherwise.</returns>
-  bool isSilentOutput() const { return mSilent; }
+  bool isSilent() const { return mSilent; }
  
   ///<summary>Returns the badge creation success flag.</summary>
   ///<returns>Returns true if the badge was created. Returns false otherwise.</returns>
