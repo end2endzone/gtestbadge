@@ -30,28 +30,43 @@
 #include "gtestbadge/BadgeEventListener.h"
 #include "rapidassist/filesystem.h"
 
+bool processBadge(const char * filename, int success, int failures)
+{
+  std::string sample_dir = SAMPLES_DIRECTORY;
+  std::string filepath = sample_dir + ra::filesystem::getPathSeparatorStr() + filename;
+
+  printf("Generating sample badge '%s'\n", filepath.c_str());
+  if ( ! BadgeEventListener::generateBadge(filepath.c_str(), success, failures, 0, BadgeEventListener::ICON_NONE, BadgeEventListener::DEFAULT_WARNING_RATIO))
+  {
+    return false;
+  }
+  return true;
+}
+
 int main(int argc, char **argv)
 {
+  std::string sample_dir = SAMPLES_DIRECTORY;
+
   //create 'samples' directory
-  if (!ra::filesystem::createFolder("samples"))
+  if (!ra::filesystem::createFolder(sample_dir.c_str()))
   {
     return __LINE__;
   }
 
   //passed
-  if ( ! BadgeEventListener::generateBadge("samples/sample_passed.svg", 56, 0, 0, BadgeEventListener::ICON_NONE, BadgeEventListener::DEFAULT_WARNING_RATIO))
+  if (!processBadge("sample_passed.svg", 56, 0))
   {
     return __LINE__;
   }
 
   //warning
-  if ( ! BadgeEventListener::generateBadge("samples/sample_warning.svg", 56, 4, 0, BadgeEventListener::ICON_NONE, BadgeEventListener::DEFAULT_WARNING_RATIO))
+  if (!processBadge("sample_warning.svg", 56, 4))
   {
     return __LINE__;
   }
 
   //error
-  if ( ! BadgeEventListener::generateBadge("samples/sample_error.svg", 56, 17, 0, BadgeEventListener::ICON_NONE, BadgeEventListener::DEFAULT_WARNING_RATIO))
+  if (!processBadge("sample_error.svg", 56, 17))
   {
     return __LINE__;
   }
@@ -62,7 +77,9 @@ int main(int argc, char **argv)
     b.setLeftText("Progress");
     b.setRightBackgroundColor("#00a2e8");
     b.setRightText("92%");
-    bool saved = b.save("samples/sample_custom_progress.svg");
+    std::string filepath = sample_dir + ra::filesystem::getPathSeparatorStr() + "sample_custom_progress.svg";
+    printf("Generating sample badge '%s'\n", filepath.c_str());
+    bool saved = b.save(filepath.c_str());
     if (!saved)
     {
       return __LINE__;

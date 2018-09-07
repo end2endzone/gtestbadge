@@ -5,6 +5,9 @@ add_executable(gtestbadge_samples
   samples.cpp
 )
 
+# Define output directory for samples.
+add_definitions(-DSAMPLES_DIRECTORY="${CMAKE_CURRENT_SOURCE_DIR}")
+
 # gtestbadge requires to link with pthread if also linking with gtest
 if(NOT WIN32)
   set(PTHREAD_LIBRARIES -pthread)
