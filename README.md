@@ -4,7 +4,7 @@
 
 GTestBadge is a GoogleTest TestEventListener implementation in c++ for generating a badge based on test results. 
 
-This project also provides a standalone library and classes for generating generic badges.
+This project also provides a standalone classes for generating generic badges.
 
 
 ## Status ##
@@ -39,7 +39,7 @@ If you want to provides a test badge in your `README.md` from a test execution o
 2) Process your test results file inside Travis and push a badge to an online image hosting service. However, finding an image hosting portal that can be accessed from the command line is not an easy task.
 3) **Process your test results file inside Travis and push a badge back to Github.**
 
-This library helps you implement the 3rd option. It listens for success and failures during googletest execution and produce a test badge based on test results at the end of test case execution.
+This library helps you implement the 3rd option. It listens for success and failures during googletest execution and, at the end of test case execution, produces a test badge based on test results .
 
 
 
@@ -50,7 +50,7 @@ The following instructions show how to use the library.
 
 
 
-## Adding the BadgeEventListener ##
+## Register a BadgeEventListener ##
 
 From your main executable file of a test suite (the one with `main()`).
 
@@ -67,12 +67,60 @@ Register a BadgeEventListener instance before the `RUN_ALL_TESTS()` call:
 // **after** the default text output printer and the default XML report generator.
 // Note: the insert order is important.
 ::testing::TestEventListeners & listeners = ::testing::UnitTest::GetInstance()->listeners();
-listeners.Append(new BadgeEventListener("test_results_badge.svg")); //Google Test assumes the ownership of the listener (i.e. it will delete the listener when the test program finishes).
+listeners.Append(new BadgeEventListener("mybadge.svg")); //Google Test assumes the ownership of the listener (i.e. it will delete the listener when the test program finishes).
 ```
 
-This code adds a BadgeEventListener instance to the test event listener list.
+By default, BadgeEventListener creates one of the following type of badge:
+* `passed` (green background, all tests are successful)
+* `warning` (orange background, some tests are failing)
+* `failed` (red background, too many tests are failing)
 
-## Creating a custom badge ##
+
+
+## Configure a BadgeEventListener ##
+
+The BadgeEventListener instance can also be configured to do one of the following:
+* Disable console output on error/warnings.
+* Query the badge creation result.
+* Change the ratio of accepted failures for a displaying a `warning` or `failed` badge.
+
+```cpp
+// Adds a BadgeEventListener instance to the end of the test event listener list, 
+// **after** the default text output printer and the default XML report generator.
+// Note: the insert order is important.
+::testing::TestEventListeners & listeners = ::testing::UnitTest::GetInstance()->listeners();
+
+// Create and register a new BadgeEventListener
+BadgeEventListener * bel = new BadgeEventListener();
+bel->setOutputFilename("mybadge.svg"); //set badge filename
+bel->setSilent(true); //disable all console output
+bel->setWarningRatio(0.3); //if less than 30% of test fails, show the `warning` badge type. Else, show the `failed` badge type.
+listeners.Append(bel); //Google Test assumes the ownership of the listener (i.e. it will delete the listener when the test program finishes).
+
+// Find and run all tests
+int wResult = RUN_ALL_TESTS();
+
+// Test badge creation result
+if (!bel->getSuccess())
+{
+  printf("ERROR: Failed saving badge to file '%s'.\n", bel->getOutputFilename().c_str());
+}
+```
+
+
+
+## Disable 'warning' badge ##
+
+By calling `setWarningRatio(0.0)`, one can change the behavior of the BadgeEventListener and disable the `warning` type of badge.
+
+On tests execution, BadgeEventListener creates one of the two types of badge:
+
+* `passed` (green background, all tests are successful)
+* `failed` (red background, at least one test fails)
+
+
+
+## Create any other badge (customization) ##
 
 The library also have classes for creating generic/custom badges.
 
