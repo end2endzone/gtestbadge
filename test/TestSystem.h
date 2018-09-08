@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-class TestBar : public ::testing::Test
+class TestSystem : public ::testing::Test
 {
 public:
   virtual void SetUp();

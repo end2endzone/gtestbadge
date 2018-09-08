@@ -7,6 +7,11 @@
 ImageListBuilder gTestBadgeEventListenerBuilder;
 extern std::string gTestFolder;
 
+extern bool isRightTextBadge(const std::string & path, const std::string & text);
+extern bool isGreenBadge(const std::string & path);
+extern bool isWarningBadge(const std::string & path);
+extern bool isFailedBadge(const std::string & path);
+
 void TestBadgeEventListener::SetUpTestCase()
 {
 }
