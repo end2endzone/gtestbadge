@@ -77,7 +77,9 @@ By default, BadgeEventListener creates one of the following type of badge:
 
 For example:
 
-![sample_passed.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_passed.svg?sanitize=true) ![sample_warning.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_warning.svg?sanitize=true) ![sample_error.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_error.svg?sanitize=true)
+![sample_passed.svg](samples/sample_passed.svg)
+![sample_warning.svg](samples/sample_warning.svg)
+![sample_error.svg](samples/sample_error.svg)
 
 
 
@@ -123,7 +125,8 @@ On tests execution, BadgeEventListener creates one of the two types of badge:
 
 For example:
 
-![sample_passed.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_passed.svg?sanitize=true) ![sample_error.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_error.svg?sanitize=true)
+![sample_passed.svg](samples/sample_passed.svg)
+![sample_warning_disabled.svg](samples/sample_warning_disabled.svg)
 
 
 
@@ -136,12 +139,53 @@ Badge b;
 b.setLeftText("Progress");
 b.setRightBackgroundColor("#00cc00");
 b.setRightText("92%");
-bool saved = b.save(iFilename.c_str());
+bool saved = b.save("sample_custom_progress.svg");
 ```
 
 Example:
 
-![sample_custom_progress.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_custom_progress.svg?sanitize=true)
+![sample_custom_progress.svg](samples/sample_custom_progress.svg)
+
+
+
+
+## Add icons (customization) ##
+
+The Badge class can create badges with icons:
+
+```cpp
+const char * FACEBOOK_ICON = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjAvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvVFIvMjAwMS9SRUMtU1ZHLTIwMDEwOTA0L0RURC9zdmcxMC5kdGQiPgo8c3ZnIHZlcnNpb249IjEuMCIgZmlsbD0iI2ZmZiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDI1MCA1MTAiPgo8cGF0aCBkPSJNMTgwIDUxMkg5OC4wMDhjLTEzLjY5NSAwLTI0LjgzNi0xMS4xNC0yNC44MzYtMjQuODM2VjMwMi4yMjdIMjUuMzM2QzExLjY0IDMwMi4yMjcuNSAyOTEuMDgyLjUgMjc3LjM5di03OS4yNDZjMC0xMy42OTYgMTEuMTQtMjQuODM2IDI0LjgzNi0yNC44MzZoNDcuODM2di0zOS42ODRjMC0zOS4zNDggMTIuMzU1LTcyLjgyNCAzNS43MjYtOTYuODA1QzEzMi4zNzUgMTIuNzMgMTY1LjE4NCAwIDIwMy43NzggMGw2Mi41My4xMDJjMTMuNjcyLjAyMyAyNC43OTQgMTEuMTY0IDI0Ljc5NCAyNC44MzV2NzMuNTc5YzAgMTMuNjk1LTExLjEzNyAyNC44MzYtMjQuODI5IDI0LjgzNmwtNDIuMTAxLjAxNWMtMTIuODQgMC0xNi4xMSAyLjU3NC0xNi44MDkgMy4zNjMtMS4xNTIgMS4zMS0yLjUyMyA1LjAwOC0yLjUyMyAxNS4yMjN2MzEuMzUyaDU4LjI3YzQuMzg2IDAgOC42MzYgMS4wODIgMTIuMjg4IDMuMTIgNy44OCA0LjQwMyAxMi43NzggMTIuNzI3IDEyLjc3OCAyMS43MjNsLS4wMzEgNzkuMjQ3YzAgMTMuNjg3LTExLjE0MSAyNC44MjgtMjQuODM2IDI0LjgyOGgtNTguNDd2MTg0Ljk0MUMyMDQuODQgNTAwLjg2IDE5My42OTYgNTEyIDE4MCA1MTJ6Ii8+Cjwvc3ZnPg==";
+Badge b;
+b.setBase64Icon(FACEBOOK_ICON);
+b.setLeftText("Friends");
+b.setLeftBackgroundColor("#3b5998");
+b.setLeftForegroundColor("#fff");
+b.setRightBackgroundColor("#fff");
+b.setRightForegroundColor("#000");
+b.setRightText("357");
+bool saved = b.save("sample_custom_facebook.svg");
+```
+
+Example:
+
+![sample_custom_facebook.svg](samples/sample_custom_facebook.svg)
+
+
+
+
+## Continuous integration detection ##
+
+The BadgeEventListener class support auto detection of popular continuous integration services. On detection, BadgeEventListener use the appropriate badge icon.
+
+The following services are detected:
+
+* AppVeyor
+* Travis CI
+
+Example:
+
+![sample_icon_appveyor.svg](samples/sample_icon_appveyor.svg)
+![sample_icon_travis.svg](samples/sample_icon_travis.svg)
 
 
 
@@ -182,4 +226,3 @@ See also the list of [contributors](https://github.com/end2endzone/GTestBadge/bl
 # License #
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
