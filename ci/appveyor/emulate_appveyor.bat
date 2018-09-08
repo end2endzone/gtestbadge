@@ -3,6 +3,7 @@
 cd /d %~dp0
 cd ..\..
 set APPVEYOR_BUILD_FOLDER=%cd%
+set APPVEYOR=True
 echo Emulating appveyor's environment.
 echo APPVEYOR_BUILD_FOLDER set to '%APPVEYOR_BUILD_FOLDER%'
 echo.
