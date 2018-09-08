@@ -44,17 +44,6 @@ bool isFailedBadge(const std::string & path)
   return found;
 }
 
-///<summary>Print the subtest executable value, on the console, only once.</summary>
-void reportSubTestExecutablePathOnce(const std::string & path)
-{
-  static bool hasPrintedOnce = false;
-  if (hasPrintedOnce)
-    return;
-
-  printf("Found subtest executable path: %s\n", path.c_str());
-  hasPrintedOnce = true;
-}
-
 ///<summary>Finds the path of 'gtestbadge_subtests' executable.</summary>
 std::string getSubtestExecutablePath()
 {
@@ -71,7 +60,6 @@ std::string getSubtestExecutablePath()
   //try local current directory
   if (ra::filesystem::fileExists(exeFilename.c_str()))
   {
-    reportSubTestExecutablePathOnce(exeFilename);
     return exeFilename;
   }
 
@@ -93,7 +81,6 @@ std::string getSubtestExecutablePath()
   testfile.append(exeFilename);
   if (ra::filesystem::fileExists(testfile.c_str()))
   {
-    reportSubTestExecutablePathOnce(testfile);
     return testfile;
   }
 
@@ -108,7 +95,11 @@ std::string getSystemTestCommandLine(const std::string & badge_filename, int num
   if (!execPath.empty())
   {
     //build the command line
-    std::string cmdline = execPath;
+    std::string cmdline;
+#ifndef _WIN32
+    cmdline.append("./");
+#endif
+    cmdline.append(execPath);
     cmdline << " --output_badge=" << badge_filename << " --num_test_failures=" << num_test_failures << " --warning_ratio_percent=" << warning_ratio_percent;
     return cmdline;
   }
@@ -122,6 +113,7 @@ TEST_F(TestSystem, testAllPassed)
   std::string cmdline = getSystemTestCommandLine(badgeFilename, 0, 20);
   
   //run subtest command
+  printf("exec: %s\n", cmdline.c_str());
   int wResult = system(cmdline.c_str());
 
   //assert success
@@ -139,6 +131,7 @@ TEST_F(TestSystem, testDisableWarning)
   std::string cmdline = getSystemTestCommandLine(badgeFilename, 1, 0);
   
   //run subtest command
+  printf("exec: %s\n", cmdline.c_str());
   int wResult = system(cmdline.c_str());
 
   //assert success
@@ -156,6 +149,7 @@ TEST_F(TestSystem, testWarning)
   std::string cmdline = getSystemTestCommandLine(badgeFilename, 6, 90);
   
   //run subtest command
+  printf("exec: %s\n", cmdline.c_str());
   int wResult = system(cmdline.c_str());
 
   //assert success
