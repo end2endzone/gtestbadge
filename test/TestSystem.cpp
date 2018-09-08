@@ -125,6 +125,46 @@ TEST_F(TestSystem, testAllPassed)
   ASSERT_TRUE(isGreenBadge(badgeFilename));
 }
 
+TEST_F(TestSystem, testCiAutodetectAppVeyor)
+{
+  std::string badgeFilename = ra::gtesthelp::getTestQualifiedName() + ".svg";
+  std::string cmdline = getSystemTestCommandLine(badgeFilename, 0, 20);
+  
+  cmdline.append(" --appveyor");
+
+  //run subtest command
+  printf("exec: %s\n", cmdline.c_str());
+  int wResult = system(cmdline.c_str());
+
+  //assert success
+  ASSERT_EQ(0, wResult);
+
+  //assert badge content
+  ASSERT_TRUE(ra::filesystem::fileExists(badgeFilename.c_str()));
+  ASSERT_TRUE(isRightTextBadge(badgeFilename, "10 passed"));
+  ASSERT_TRUE(isGreenBadge(badgeFilename));
+}
+
+TEST_F(TestSystem, testCiAutodetectTravis)
+{
+  std::string badgeFilename = ra::gtesthelp::getTestQualifiedName() + ".svg";
+  std::string cmdline = getSystemTestCommandLine(badgeFilename, 0, 20);
+  
+  cmdline.append(" --travis");
+
+  //run subtest command
+  printf("exec: %s\n", cmdline.c_str());
+  int wResult = system(cmdline.c_str());
+
+  //assert success
+  ASSERT_EQ(0, wResult);
+
+  //assert badge content
+  ASSERT_TRUE(ra::filesystem::fileExists(badgeFilename.c_str()));
+  ASSERT_TRUE(isRightTextBadge(badgeFilename, "10 passed"));
+  ASSERT_TRUE(isGreenBadge(badgeFilename));
+}
+
 TEST_F(TestSystem, testDisableWarning)
 {
   std::string badgeFilename = ra::gtesthelp::getTestQualifiedName() + ".svg";

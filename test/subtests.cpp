@@ -26,11 +26,19 @@
 #include <iostream>
 #include <stdio.h>
 
+//for putenv()
+#ifndef _WIN32
+#include <unistd.h>
+#endif
+#include <stdlib.h>
+#include <string.h>
+
 #include <gtest/gtest.h>
 
 #include "rapidassist/gtesthelp.h"
 #include "rapidassist/filesystem.h"
 #include "rapidassist/cli.h"
+#include "rapidassist/environment.h"
 
 #include "gtestbadge/BadgeEventListener.h"
 
@@ -81,10 +89,36 @@ int main(int argc, char **argv)
   }
   double ratio = double(warning_ratio_percent)/100.0;
 
+  //detect forced icons
+  std::string forced_icon;
+  int tmp = 0;
+  if (ra::cli::parseArgument("appveyor", tmp, argc, argv))
+  {
+#ifdef _WIN32
+    _putenv("APPVEYOR=True");
+#else
+    putenv("APPVEYOR=True");
+#endif
+    forced_icon = "AppVeyor";
+  }
+  else if (ra::cli::parseArgument("travis", tmp, argc, argv))
+  {
+#ifdef _WIN32
+    _putenv("TRAVIS=true");
+#else
+    putenv("TRAVIS=true");
+#endif
+    forced_icon = "Travis CI";
+  }
+
   //print arguments
   printf("Generating badge file '%s'.\n", output_badge.c_str());
   printf("Warning ratio set to %.2f.\n", ratio);
-  printf("Forcing %d test(s) to fail.\n", num_test_failures);
+  printf("Forcing %d test(s) out of 10 to fail.\n", num_test_failures);
+  if (!forced_icon.empty())
+  {
+    printf("CI service: %s.\n", forced_icon.c_str());
+  }
 
   // Adds a BadgeEventListener instance to the end of the test event listener list, 
   // **after** the default text output printer and the default XML report generator.

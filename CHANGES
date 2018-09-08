@@ -6,6 +6,7 @@ Changes for 0.2.0:
 * New feature: Implemented 'silent' mode. Disables warning and error messages if silent mode is active.
 * New feature: Renamed setSilentOutput() to setSilent() and isSilentOutput() to isSilent().
 * New feature: Implemented getSuccess() to get the badge creation result.
+* New feature: BadgeEventListener autodetect popular continuous integration services and use the appropriate badge icon.
 
 Changes for 0.1.0:
 

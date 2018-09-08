@@ -1,6 +1,7 @@
 #include "gtestbadge/BadgeEventListener.h"
 #include "gtestbadge/Badge.h"
 #include "rapidassist/strings.h"
+#include "rapidassist/gtesthelp.h"
 
 using ra::strings::toString;
 
@@ -84,7 +85,18 @@ void BadgeEventListener::OnTestProgramEnd(const UnitTest& unit_test)
   //validate filename
   if (!mOutputFilename.empty())
   {
-    mSuccess = generateBadge(mOutputFilename, numSuccess, numFailed, numDisabled, ICON_NONE, mWarningRatio);
+    //detect appropriate icon
+    SYSTEM_ICON icon = ICON_NONE;
+    if (ra::gtesthelp::isAppVeyor())
+    {
+      icon = ICON_APPVEYOR;
+    }
+    else if (ra::gtesthelp::isTravis())
+    {
+      icon = ICON_TRAVIS;
+    }
+
+    mSuccess = generateBadge(mOutputFilename, numSuccess, numFailed, numDisabled, icon, mWarningRatio);
     if (!mSuccess && !mSilent)
     {
       printf("BadgeEventListener: [ERROR] Failed saving '%s' test result badge.\n", mOutputFilename.c_str());
