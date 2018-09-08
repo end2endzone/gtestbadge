@@ -75,6 +75,10 @@ By default, BadgeEventListener creates one of the following type of badge:
 * `warning` (orange background, some tests are failing)
 * `failed` (red background, too many tests are failing)
 
+For example:
+
+![sample_passed.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_passed.svg?sanitize=true) ![sample_warning.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_warning.svg?sanitize=true) ![sample_error.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_error.svg?sanitize=true)
+
 
 
 ## Configure a BadgeEventListener ##
@@ -114,9 +118,12 @@ if (!bel->getSuccess())
 By calling `setWarningRatio(0.0)`, one can change the behavior of the BadgeEventListener and disable the `warning` type of badge.
 
 On tests execution, BadgeEventListener creates one of the two types of badge:
-
-* `passed` (green background, all tests are successful)
+* `passed` (green background, all tests are successful) 
 * `failed` (red background, at least one test fails)
+
+For example:
+
+![sample_passed.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_passed.svg?sanitize=true) ![sample_error.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_error.svg?sanitize=true)
 
 
 
@@ -132,6 +139,9 @@ b.setRightText("92%");
 bool saved = b.save(iFilename.c_str());
 ```
 
+Example:
+
+![sample_custom_progress.svg](https://raw.githubusercontent.com/end2endzone/gtestbadge/master/samples/sample_custom_progress.svg?sanitize=true)
 
 
 
