@@ -1,3 +1,15 @@
+Changes for 0.2.0:
+
+* Fixed issue #1: Created system tests for `BadgeEventListener`.
+* New feature: Created gtestbadge_samples project to generate valid badge samples (for displaying on README.md)
+* New feature: Created GTESTBADGE_BUILD_SAMPLES build option.
+* New feature: Implemented 'silent' mode. Disables warning and error messages if silent mode is active.
+* New feature: Renamed setSilentOutput() to setSilent() and isSilentOutput() to isSilent().
+* New feature: Implemented getSuccess() to get the badge creation result.
+
 Changes for 0.1.0:
 
 * First public release.
+
+
+
