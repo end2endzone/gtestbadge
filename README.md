@@ -4,7 +4,22 @@
 
 GTestBadge is a GoogleTest TestEventListener implementation in c++ for generating a badge based on test results. 
 
+For example:
+
+![sample_passed.svg](samples/sample_passed.svg)
+![sample_warning.svg](samples/sample_warning.svg)
+![sample_error.svg](samples/sample_error.svg)
+![sample_icon_appveyor.svg](samples/sample_icon_appveyor.svg)
+![sample_icon_travis.svg](samples/sample_icon_travis.svg)
+
+
 This project also provides a standalone classes for generating generic badges.
+
+For example:
+
+![sample_custom_progress.svg](samples/sample_custom_progress.svg)
+![sample_custom_facebook.svg](samples/sample_custom_facebook.svg)
+
 
 
 ## Status ##
@@ -173,7 +188,7 @@ Example:
 
 
 
-## Continuous integration detection ##
+## Continuous integration service detection ##
 
 The BadgeEventListener class support auto detection of popular continuous integration services. On detection, BadgeEventListener use the appropriate badge icon.
 
